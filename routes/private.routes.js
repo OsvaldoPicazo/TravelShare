@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const Room = require('./../models/Room.model');
+const Trip = require('./../models/Trip.model');
 
 router.get('/profile', (req, res) => {
 	res.render('private/profile', { user: req.session.currentUser });
 });
 
-router.get('/rooms/add', (req, res) => {
-	res.render('rooms/new-room');
+router.get('/trips/add', (req, res) => {
+	res.render('trips/new-trip');
 });
 
-router.post('/rooms/add', (req, res) => {
+router.post('/trips/add', (req, res) => {
 
 	//Get the user id from the session
 	const userId = req.session.currentUser._id;
@@ -21,16 +21,16 @@ router.post('/rooms/add', (req, res) => {
 
 	console.log(name, description, imageUrl);
 
-	Room.create({
+	Trip.create({
 		name,
 		description,
 		imageUrl,
 		owner: userId
 	})
-	.then((createdRoom) => {
+	.then((createdTrip) => {
 
-		console.log(createdRoom)
-		res.redirect('/private/rooms/add');
+		console.log(createdTrip)
+		res.redirect('/private/trips/add');
 
 	})
 	.catch((error) => {console.log(error)})

@@ -6,7 +6,7 @@ var express = require('express');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require("./routes/auth.routes");
-const privateRouter = require('./routes/private-routes');
+const privateRouter = require('./routes/private.routes');
 
 var app = express();
 
