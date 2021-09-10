@@ -71,7 +71,7 @@ router.get('/trips', (req, res) => {
 
 router.get('/', function(req, res, next) {
   User.find().then((users)=>
-  res.render('index', { title: 'Express', users})
+  res.render('index', { title: 'Sum', users })
   )
 });
 
