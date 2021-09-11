@@ -4,7 +4,7 @@ var router = express.Router();
 const User = require("../models/User.model")
 const Trip = require('./../models/Trip.model');
 const Review = require('./../models/Review.model');
-/* GET home page. */
+
 
 router.get('/trips/:id', (req, res) => {
 	const { id } = req.params;
@@ -62,16 +62,20 @@ router.get('/trips', (req, res) => {
 	Trip.find()
 		.populate('owner')
 		.then((trips) => {
-			res.render('trips/all-trips', { trips });
+			res.render('trips/all-trips', { trips, style: 'trips.css' });
 		})
 		.catch((error) => {
 			console.log(error);
 		});
 });
 
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
   User.find().then((users)=>
-  res.render('index', { title: 'Sum', users })
+  res.render('index', { 
+	  title: 'Sum',
+	  style: 'home.css', users })
   )
 });
 

@@ -61,8 +61,8 @@ router.post('/signup', isNotLoggedIn, (req, res) => {
 		.catch((err) => console.log(err));
 });
 
-router.get('/login', isNotLoggedIn, (req, res) => {
-	res.render('auth/login');
+router.get('/login', (req, res) => {
+	res.render('auth/login',{style: 'login.css'});
 });
 
 router.post('/login', isNotLoggedIn, (req, res) => {
