@@ -4,7 +4,10 @@ const router = express.Router();
 const Trip = require('./../models/Trip.model');
 
 router.get('/profile', (req, res) => {
-	res.render('private/profile', { user: req.session.currentUser });
+	res.render('private/profile', {
+		 user: req.session.currentUser,
+		 style: 'profile.css'
+		});
 });
 
 router.get('/trips/add', (req, res) => {

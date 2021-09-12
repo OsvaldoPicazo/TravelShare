@@ -11,7 +11,8 @@ const path = require("path");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-const hbs = require('hbs')
+const hbs = require('hbs');
+const { proppatch } = require('../routes');
 
 // Middleware configuration
 module.exports = (app) => {
@@ -32,6 +33,7 @@ module.exports = (app) => {
   hbs.registerPartials(path.join(__dirname, "..", '/views/partials'))
 
   // Handles access to the public folder
+  //app.use(express.static('public'))
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Handles access to the favicon

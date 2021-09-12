@@ -63,16 +63,20 @@ router.get('/trips', (req, res) => {
 	Trip.find()
 		.populate('participants')
 		.then((trips) => {
-			res.render('trips/all-trips', { trips });
+			res.render('trips/all-trips', { trips, style: 'trips.css' });
 		})
 		.catch((error) => {
 			console.log(error);
 		});
 });
 
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
   User.find().then((users)=>
-  res.render('index', { title: 'Sum', users })
+  res.render('index', { 
+	  title: 'Sum',
+	  style: 'home.css', users })
   )
 });
 
