@@ -1,3 +1,3 @@
-# This is the template for poject 2
+# This is Project 2
 
-## User is marco-ih-bcn
+

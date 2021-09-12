@@ -11,7 +11,9 @@ const isNotLoggedIn = require('./../middleware/isNotLoggedIn')
 
 //2 - Create 5 routes: 2 for login, 2 for signup and 1 for logout
 router.get('/signup', isNotLoggedIn, (req, res) => {
-	res.render('auth/signup');
+	res.render('auth/signup',{
+		style: 'signup.css'
+	});
 });
 
 router.post('/signup', isNotLoggedIn, (req, res) => {
@@ -105,7 +107,7 @@ router.post('/login', isNotLoggedIn, (req, res) => {
 router.get('/logout', (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
-			res.render('error', { message: 'Something went wrong! Yikes!' });
+			res.render('error', { message: 'Something went wrong!' });
 		} else {
 			res.redirect('/');
 		}

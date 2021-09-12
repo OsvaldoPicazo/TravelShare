@@ -1,14 +1,14 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: rgb(85, 233, 233);
+    background: rgb(233, 85, 196);
   }
   
   a {
     color: #00B7FF;
   }
 
-#login {
+#signup {
   display: none;
 }
 #logout {
