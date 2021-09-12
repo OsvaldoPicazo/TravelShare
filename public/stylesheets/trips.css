@@ -1,19 +1,21 @@
 body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: rgb(143, 146, 146);
-  }
-  
-  a {
-    color: #00B7FF;
-  }
-
-
-  #signup {
-    
-    display: none;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: rgb(143, 146, 146);
 }
-#login {
- 
+  
+a {
+  color: #00B7FF;
+}
+
+#signup {  
   display: none;
+}
+
+#login {
+  display: none;
+}
+
+img {
+width: 100px;
 }

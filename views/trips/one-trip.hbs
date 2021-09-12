@@ -1,8 +1,8 @@
 <h1> Trip details</h1>
 
 <div class="trip-card">
-
 </div>
+
 <h2>Name: {{trip.name}}</h2>
 <p>Description: {{trip.description}}</p>
 <img class="trip-img" src="{{trip.imageUrl}}" alt="{{trip.name}}" />
@@ -14,15 +14,23 @@
 <h2>Add an expense:</h2>
 <form action='/private/trips/{{trip._id}}' method='POST'>
 
-  <label>Description: </label>
-  <textarea type="text" name="description" required></textarea>
+  <label for="description">Description: </label>
+  <textarea type="text" name="description" id="description" required></textarea>
 
-  <label>Category:</label>
-  <input type="text" name="category" />
+  <br>
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="General" selected>General</option>
+    <option value="Accommodation">Accommodation</option>
+    <option value="Transport">Transport</option>
+    <option value="Food & Drink">Food & Drink</option>
+  </select>
 
-  <label>Cost:</label>
-  <input type="number" name="cost" required/>  
+  <br>
+  <label for="cost">Cost:</label>
+  <input type="text" name="cost" id="cost" required/>  
 
+  <br>
   <button type="submit">Add expense</button>
 
 </form>
@@ -30,14 +38,19 @@
 
 
 {{#if trip.expenses}}
+
 <h3>List of expenses:</h3>
+  
   {{#each trip.expenses}}
-    <h4>Description: {{this.description}}</h4>
-    <h5>Cost: {{this.cost}}</h5>
     <br>
+    <h4>Description: {{this.description}}</h4>
+    
+    <h5>Cost: {{this.cost}}</h5>
+  
     <p>Category: {{this.category}}</p>
     <p>Paid by: {{this.user.username}}</p>
-    <br>
     <p>Participants: {{this.trip.participants.username}}</p>
+
   {{/each}}
+
 {{/if}}

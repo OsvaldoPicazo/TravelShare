@@ -4,19 +4,26 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 
+const fileUploader = require("../config/cloudinary")
+
 router.get('/trips/add', (req, res) => {
 	res.render('trips/new-trip');
 });
 
-router.post('/trips/add', (req, res) => {
+router.post('/trips/add', fileUploader.single("imageUrl"), (req, res) => {
 
 	//Get the user id from the session
 	const userId = req.session.currentUser._id;
 
 	//Get the form data from the body
-	const { name, description, imageUrl } = req.body;
-
-	console.log(name, description, imageUrl);
+	const { name, description } = req.body;
+	// console.log(req.file)
+	if (req.file === undefined) {
+		var imageUrl; 	// if no image was uploaded then define imageUrl as undefined, in this way it will take the default image from the trip model
+	} else {
+		const imageUrl = req.file.path;
+	}
+	// console.log(name, description, imageUrl);
 
 	Trip.create({
 		name,
@@ -93,11 +100,19 @@ router.get('/profile', (req, res) => {
 		});
 });
 
+// {
+// 	filter: {
+// 	 participants: ObjectId('613e63306b32599300f860a3')
+// 	}
+//    }
+
 router.get('/trips', (req, res) => {
-	//Get trips from database
-	Trip.find()
+	//Get trips from current user
+	const userId = req.session.currentUser._id
+	Trip.find({ participants: userId })
 		.populate('participants')
 		.then((trips) => {
+			// console.log(trips)
 			res.render('trips/all-trips', { trips, style: 'trips.css' });
 		})
 		.catch((error) => {
