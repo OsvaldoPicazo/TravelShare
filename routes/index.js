@@ -3,25 +3,23 @@ var router = express.Router();
 
 const User = require("../models/User.model")
 const Trip = require('./../models/Trip.model');
-const Review = require('./../models/Review.model');
+const Expense = require('../models/Expense.model');
 /* GET home page. */
 
 router.get('/trips/:id', (req, res) => {
-	const { id } = req.params;
-	//const tripId = req.params.id
+	const  tripId  = req.params.id;
 
-  
-
-	Trip.findById(req.params.id)
-		.populate('owner')	// owner is property key of the room object, it has an id inside. populates takes the id and extracts de data (populates) from this id
-		.populate({				// 2nd level populate
-			path: 'reviews',
+	Trip.findById(tripId)
+		.populate('participants')	// participants is a property of the trip object, it is of type object and, therefore, has an id inside. populates takes the id and extracts de data from this id
+		.populate({				
+			path: 'expenses',		// // 2nd level populate
 			populate: {
-				path: 'user'
+				path: 'user trip',
+				populate: 'participants'
 			}
 		})
 		.then((trip) => {
-			console.log(trip)
+			console.log("trip: ", trip)
 			res.render('trips/one-trip', { trip });
 		})
 		.catch((error) => {
@@ -32,20 +30,23 @@ router.get('/trips/:id', (req, res) => {
 router.post('/trips/:id', (req, res) => {
 	//GET the values
 	const tripId = req.params.id;
-	const { comment } = req.body;
+	const { description, category, cost} = req.body; 
 
-	Review.create({
+	Expense.create({
+		description,
+		category,
+		cost,
 		user: req.session.currentUser._id,
-		comment // comment: req.body.comment
-	})
-		.then((newReview) => {
-			console.log(newReview);
+		trip: tripId
+		})
+		.then((newExpense) => {
+			//console.log(newExpense);
 
 			Trip.findByIdAndUpdate(tripId, {
-				$addToSet: { reviews: newReview._id }	// $addToSet for arrays and ensure no objects are duplicates
+				$addToSet: { expenses: newExpense._id }	// $addToSet for arrays and ensure no objects are duplicates
 			})
 				.then((updatedTrip) => {
-					console.log(updatedTrip);
+					//console.log(updatedTrip);
 					res.redirect(`/trips/${tripId}`);
 				})
 				.catch((error) => {
@@ -58,9 +59,9 @@ router.post('/trips/:id', (req, res) => {
 });
 
 router.get('/trips', (req, res) => {
-	//Get rooms from DB
+	//Get trips from database
 	Trip.find()
-		.populate('owner')
+		.populate('participants')
 		.then((trips) => {
 			res.render('trips/all-trips', { trips });
 		})

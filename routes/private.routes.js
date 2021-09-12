@@ -25,7 +25,7 @@ router.post('/trips/add', (req, res) => {
 		name,
 		description,
 		imageUrl,
-		owner: userId
+		participants: userId
 	})
 	.then((createdTrip) => {
 

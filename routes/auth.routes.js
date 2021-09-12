@@ -51,7 +51,7 @@ router.post('/signup', isNotLoggedIn, (req, res) => {
 				User.create({ username, email, password: hash })
 					.then((newUser) => {
 
-						console.log(newUser);
+						//console.log(newUser);
 						//Once created, redirect
 						res.redirect('/auth/login');
 					})

@@ -10,9 +10,13 @@
 
 <img class="trip-img" src="{{imageUrl}}" alt="{{name}}" />
 
-<h4>Owner: {{owner.email}}</h4>
-
-<a href="/trips/{{_id}}">See more</a>
+<h4>Participants: </h4>
+    {{#each participants}}
+        {{username}}
+    {{/each}}
+<br>
+<br>
+<a href="/trips/{{_id}}">Trip details</a>
 </div>
 
 {{/each}}

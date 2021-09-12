@@ -1,15 +1,30 @@
 const { Schema, model } = require('mongoose');
 
 const tripSchema = new Schema({
-	name: { type: String },
-	description: { type: String },
+	name: { 
+		type: String,
+		required: true
+	},
+	description: { 
+		type: String 
+	},
+	// option to add an image to the trip
 	imageUrl: {
 		type: String,
 		default:
-			'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80'
+			'https://previews.123rf.com/images/lenm/lenm1107/lenm110700274/9991430-illustration-of-friends-taking-a-summer-trip.jpg'
 	},
-	owner: { type: Schema.Types.ObjectId, ref: 'User' },
-	reviews: [{type: Schema.Types.ObjectId, ref: 'Review', default: []}]
+	// list of participants (users). Right now only the user participates in the trip. later it should be an array to have several participants
+	participants: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'User'
+	 },
+	 // list of expenses. When creating a new trip, by default the list of expenses is empty
+	expenses: [{
+		type: Schema.Types.ObjectId, 
+		ref: 'Expense', 
+		default: []
+	}]
 });
 
 const Trip = model('Trip', tripSchema);
