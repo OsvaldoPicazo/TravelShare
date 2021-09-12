@@ -5,9 +5,9 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = process.env.SALT || 10;
 
-const User = require('./../models/User.model');
+const User = require('../models/User.model');
 
-const isNotLoggedIn = require('./../middleware/isNotLoggedIn')
+const isNotLoggedIn = require('../middleware/isNotLoggedIn')
 
 //2 - Create 5 routes: 2 for login, 2 for signup and 1 for logout
 router.get('/signup', isNotLoggedIn, (req, res) => {
@@ -76,11 +76,12 @@ router.post('/login', isNotLoggedIn, (req, res) => {
 		!username ||
 		username === '' ||
 		!password ||
-		password === '' ||
-		!email ||
-		email === '' ||
-		!email.includes('@')
-	) {
+		password === '' //||
+		//!email ||
+		//email === '' ||
+		//!email.includes('@'
+		)
+	{
 		res.render('auth/signup', { errorMessage: 'Something went wrong' });
 	}
 
