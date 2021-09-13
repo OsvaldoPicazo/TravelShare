@@ -1,4 +1,4 @@
-<h1> Trip details</h1>
+<h1>Trip Details</h1>
 
 <div class="trip-card">
 </div>
@@ -7,12 +7,18 @@
 <p>Description: {{trip.description}}</p>
 <img class="trip-img" src="{{trip.imageUrl}}" alt="{{trip.name}}" />
 
-<h4>Participants: {{trip.participants.username}}</h4>
+<h4>Participants: </h4>
+    {{#each trip.participants}}
+      <p>{{username}}</p>
+    {{/each}}
+  <br>
+  <br>
+  <p>Total Expenses: {{trip.totalExpenses}}</p>
 
-<br/>
-<br/>
+
 <h2>Add an expense:</h2>
-<form action='/private/trips/{{trip._id}}' method='POST'>
+
+<form action='/private/trips/{{trip._id}}/expense' method='POST'>
 
   <label for="description">Description: </label>
   <textarea type="text" name="description" id="description" required></textarea>
@@ -34,8 +40,6 @@
   <button type="submit">Add expense</button>
 
 </form>
-
-
 
 {{#if trip.expenses}}
 

@@ -9,12 +9,22 @@
   <label for="description">Description: </label>
   <textarea type="text" name="description" id="description" required></textarea>
 
+  <br>
+  <label for='participants'>Participants</label>
+  <select name='participants' id="participants" multiple>
+      <option disable selected value="" >Select participants</option>
+      {{#each allUsers}}
+          <option value="{{this._id}}">{{this.username}}</option>
+      {{/each}}
+  </select>
+
   <label for="imageUrl">Image:</label>
   <input type="file" name="imageUrl" id="imageUrl">  
 
   <button type="submit">Create Trip</button>
 
 </form>
+
 
 {{#if errorMessage}}
   <p>{{errorMessage}}</p>
