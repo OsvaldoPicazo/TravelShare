@@ -8,12 +8,9 @@ body {
     color: #00B7FF;
   }
 
-
-  #signup {
-    
-    display: none;
-}
 #login {
- 
   display: none;
+}
+#signup {
+ display: none;
 }

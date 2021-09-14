@@ -4,8 +4,9 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 
+
 router.get('/trips/add', (req, res) => {
-	res.render('trips/new-trip');
+	res.render('trips/new-trip', {style: 'private.css'});
 });
 
 router.post('/trips/add', (req, res) => {
@@ -17,6 +18,7 @@ router.post('/trips/add', (req, res) => {
 	const { name, description, imageUrl } = req.body;
 
 	console.log(name, description, imageUrl);
+	
 
 	Trip.create({
 		name,
@@ -33,6 +35,64 @@ router.post('/trips/add', (req, res) => {
 	.catch((error) => {console.log(error)})
 
 });
+
+
+
+
+//-----------------------------------------------------------------------------------
+
+
+//COUNTRY DETAILS ROUTES
+router.get("/country/:id", (req, res, next) => {
+	const { id } = req.params;
+	countryModel
+	  .findById(id)
+	  .then((data) => {
+		let clientId = process.env.CLIENT_ID;
+		let { name } = data;
+		let url =
+		  "https://api.unsplash.com/search/photos?client_id=" +
+		  clientId +
+		  "&query=" +
+		  name;
+  
+		//make a request to the api
+  
+		axios
+		  .get(url)
+		  .then(function (response) {
+			if (response.data.total == 0) {
+			  res.render("country/country-details.hbs", {
+				msg: "Please enter a valid country name",
+			  });
+			} else {
+			  res.render("country/country-details.hbs", {
+				images: response.data.results,
+				data,
+				user: req.session.userInfo,
+			  });
+			}
+		  })
+		  .catch((err) => next(err));
+	  })
+	  .catch((err) => {
+		next(err);
+	  });
+  });
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------------------------------------------------------------
+
+
+
 
 router.get('/trips/:id', (req, res) => {
 	const  tripId  = req.params.id;
@@ -86,10 +146,16 @@ router.post('/trips/:id', (req, res) => {
 		});
 });
 
+
+
+
+
+
+
 router.get('/profile', (req, res) => {
 	res.render('private/profile', {
 		 user: req.session.currentUser,
-		 style: 'profile.css'
+		 style: 'private.css'
 		});
 });
 
@@ -98,7 +164,7 @@ router.get('/trips', (req, res) => {
 	Trip.find()
 		.populate('participants')
 		.then((trips) => {
-			res.render('trips/all-trips', { trips, style: 'trips.css' });
+			res.render('trips/all-trips', { trips, style: 'private.css' });
 		})
 		.catch((error) => {
 			console.log(error);
