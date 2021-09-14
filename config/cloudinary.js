@@ -17,5 +17,5 @@ const storage = new CloudinaryStorage({
     folder: 'cloudinary-test' // Folder name on the Cloudinary disk
   }
 })
-cl
+
 module.exports = multer({storage}) // Multer will be responsible for reading the forma and store on the cloud

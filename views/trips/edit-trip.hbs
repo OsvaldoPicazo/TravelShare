@@ -1,13 +1,13 @@
-<h1>Create a Trip</h1>
+<h1>Edit Trip</h1>
 
 
-<form action="/private/trips/add" method='POST' enctype="multipart/form-data">
+<form action="/private/trips/{{trip._id}}/edit" method='POST' enctype="multipart/form-data">
 
   <label for="name">Name:</label>
-  <input type="text" name="name" id="name" required />
+  <input type="text" name="name" id="name" value="{{trip.name}}" required />
 
   <label for="description">Description: </label>
-  <textarea type="text" name="description" id="description" required></textarea>
+  <textarea type="text" name="description" id="description" required>{{trip.description}}</textarea>
 
   <br>
   <label for='participants'>Participants</label>
@@ -18,10 +18,10 @@
       {{/each}}
   </select>
 
-  <label for="imageUrl">Image:</label>
-  <input type="file" name="imageUrl" id="imageUrl">  
+<label for="imageUrl">Image:</label>
+<input type="file" name="imageUrl" id="imageUrl" value="{{trip.imageUrl}}"/>
 
-  <button type="submit">Create Trip</button>
+  <button type="submit">Save</button>
 
 </form>
 

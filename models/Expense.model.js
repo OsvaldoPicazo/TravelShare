@@ -22,7 +22,7 @@ const expenseSchema = new Schema({
 		type: Number,
 		required: true
 	},
-	// The user that creates the expense is the one that pays the total cost. May be improved with more functions
+	// The person who paid. At this moment is the same as the current use
 	user: { 
 		type: Schema.Types.ObjectId, 
 		ref: 'User' 
@@ -31,7 +31,12 @@ const expenseSchema = new Schema({
 	trip: { 
 		type: Schema.Types.ObjectId, 
 		ref: 'Trip' 
-	}
+	},
+	// Users that took part in the expense
+	contributors: [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'User'
+	}]
 });
 
 const Expense = model('Expense', expenseSchema);

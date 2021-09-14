@@ -3,37 +3,146 @@ const router = express.Router();
 
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
+const User = require('../models/User.model');
 
+// define object to upload file to the cloud
+const fileUploader = require("../config/cloudinary");
+const { populate } = require('../models/Trip.model');
 
-router.get('/trips/add', (req, res) => {
-	res.render('trips/new-trip', {style: 'private.css'});
-});
+// -----------------------------------------------------------
+// 				PRIVATE REQUESTS
+// -----------------------------------------------------------
 
-router.post('/trips/add', (req, res) => {
+// delete an expense
+router.post('/trips/:id/expenses/:expenseId/delete', (req, res)=> {
+	const tripId = req.params.id;
+    Expense.findByIdAndDelete(req.params.expenseId)
+    .then(deletedExpense => res.redirect(`/private/trips/${tripId}`))
+    .catch(error=> console.log(error))
+})
 
-	//Get the user id from the session
-	const userId = req.session.currentUser._id;
+// edit an expense
+router.route('/trips/:id/expenses/:expenseId/edit')
+	.get((req, res) => {
+		Expense.findById(req.params.expenseId)
+		.populate("user")
+		.populate("contributors")	
+		.populate("trip")
+		.populate({
+			path: "trip",
+			populate: {
+				path: 'participants'
+			}
+		})
+		.then(expense => {
+			res.render('expenses/edit-expense', {expense})
+		})
+		.catch((error)=> {console.log(error)})
+	})
+	.post((req, res) => {
+		const  tripId  = req.params.id;
+		const {
+			description,
+			category,
+			cost,
+			contributors
+		} = req.body
+		Expense.findByIdAndUpdate(
+			req.params.expenseId, 
+			{
+			description,
+			category,
+			cost,
+			contributors
+			})
+		.then(updatedExpense => res.redirect(`/private/trips/${tripId}`))
+		.catch((error)=> {console.log(error)})
+	})
 
-	//Get the form data from the body
-	const { name, description, imageUrl } = req.body;
+// add a new expense
+router.route('/trips/:id/expenses/add')
+	.get((req, res) => {
+		Trip.findById(req.params.id)
+		.populate("participants")
+		.then(trip => {
+			res.render('expenses/new-expense', {trip})
+		})
+		.catch((error)=> {console.log(error)})
+	})	
+	.post((req, res) => {
+		const  tripId  = req.params.id;
+		const {
+			description,
+			category,
+			cost,
+			contributors
+		} = req.body
 
-	console.log(name, description, imageUrl);
-	
+		Expense.create({
+			description,
+			category,
+			cost,
+			user: req.session.currentUser._id,
+			trip: tripId,
+			contributors
+		})
+		.then(newExpense=> {
+			Trip.findByIdAndUpdate(tripId,
+			{$push: {expenses: newExpense._id}})
+			.then((trip) => {
+				res.redirect(`/private/trips/${tripId}`)
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		})
+	});
+
+// view details of an specific expense
+router.get('/trips/:id/expenses/:expenseId', (req, res) => {
+	Expense.findById(req.params.expenseId)
+	.populate("user")
+	.populate("contributors")	
+	.populate("trip")
+	.then(expense => {
+		res.render('expenses/one-expense', {expense})
+	})
+	.catch((error) => {console.log(error)})
+})
+
+// add a new trip to the current user
+router.route('/trips/add')
+	.get((req, res) => {
+		User.find()
+		.then(allUsers => {
+          res.render('trips/new-trip', {allUsers})
+        })
+		.catch((error)=> {console.log(error)})
+	})
+	.post(fileUploader.single("imageUrl"), (req, res) => {
+
+		//Get the user id from the session
+		const userId = req.session.currentUser._id;
+		//Get the form data from the body
+		const { name, description, participants} = req.body;
+		
+		//if no image was uploaded then define imageUrl as undefined, in this way it will take the default image from the trip model
+		if (req.file === undefined) {
+			var imageUrl; 	
+		} else {
+			const imageUrl = req.file.path;
+		}
 
 	Trip.create({
 		name,
 		description,
 		imageUrl,
-		participants: userId
+		participants
 	})
 	.then((createdTrip) => {
-
-		console.log(createdTrip)
 		res.redirect('/private/trips');
-
 	})
 	.catch((error) => {console.log(error)})
-
 });
 
 
@@ -94,80 +203,101 @@ router.get("/country/:id", (req, res, next) => {
 
 
 
-router.get('/trips/:id', (req, res) => {
-	const  tripId  = req.params.id;
 
-	Trip.findById(tripId)
-		.populate('participants')	// participants is a property of the trip object, it is of type object and, therefore, has an id inside. populates takes the id and extracts de data from this id
-		.populate({				
-			path: 'expenses',		// // 2nd level populate
-			populate: {
-				path: 'user trip',
-				populate: 'participants'
-			}
-		})
-		.then((trip) => {
-			console.log("trip: ", trip)
-			res.render('trips/one-trip', { trip });
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-});
-
-router.post('/trips/:id', (req, res) => {
-	//GET the values
+// delete trip
+router.post('/trips/:id/delete', (req, res)=> {
 	const tripId = req.params.id;
-	const { description, category, cost} = req.body; 
-
-	Expense.create({
-		description,
-		category,
-		cost,
-		user: req.session.currentUser._id,
-		trip: tripId
+    Trip.findByIdAndDelete(tripId)
+    .then(deletedTrip => {
+		console.log(deletedTrip)
+		Expense.deleteMany({trip : tripId})
+		.then(deletedExpenses => {
+			console.log(deletedExpenses)
+			res.redirect('/private/trips')
 		})
-		.then((newExpense) => {
-			//console.log(newExpense);
+		.catch(error=> console.log(error))
+	})
+    .catch(error=> console.log(error))
+})
 
-			Trip.findByIdAndUpdate(tripId, {
-				$addToSet: { expenses: newExpense._id }	// $addToSet for arrays and ensure no objects are duplicates
+// edit a trip
+router.route('/trips/:id/edit')
+	.get((req, res) => {
+		Trip.findById(req.params.id)
+		.populate("participants")
+	    .populate("expenses")
+	    .populate({
+		path: "expenses",
+		populate: {
+			path: 'user trip contributors'
+		}
+	})
+		.then(trip => {
+			User.find()
+			.then(allUsers => {
+				res.render('trips/edit-trip', {trip, allUsers})
 			})
-				.then((updatedTrip) => {
-					//console.log(updatedTrip);
-					res.redirect(`/private/trips/${tripId}`);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			.catch((error)=> {console.log(error)})
+		})
+		.catch((error)=> {console.log(error)})
+	})
+	.post(fileUploader.single("imageUrl"), (req, res) => {
+		const tripId = req.params.id
+		//Get the form data from the body
+		const { name, description, participants} = req.body;
+		i
+		Trip.findByIdAndUpdate(
+			tripId,
+			{
+				name,
+				description,
+				participants
+			})
+		.then(updatedTrip => {
+			res.redirect(`/private/trips/${tripId}`)
+		})
+		.catch((error)=> {console.log(error)})
+	})
+
+// display a specific trip
+router.get('/trips/:id', (req, res) => {
+	Trip.findById(req.params.id)
+	.populate("participants")
+	.populate("expenses")
+	.populate({
+		path: "expenses",
+		populate: {
+			path: 'user trip contributors'
+		}
+	})
+	.then(trip=>{
+		const totalExpenses = trip.expenses.reduce((sum, el) => sum + el.cost,
+		0)
+		trip.totalExpenses = totalExpenses
+		res.render("trips/one-trip", {trip})
+	})
+	.catch((error) => {console.log(error)})
+})
+
+// display all the trips of the current user 
+router.get('/trips', (req, res) => {
+	const userId = req.session.currentUser._id
+	
+	Trip.find({ participants: userId })
+		.populate('participants')
+		.then((trips) => {
+			res.render('trips/all-trips', { trips, style: 'trips.css' });
 		})
 		.catch((error) => {
 			console.log(error);
 		});
 });
 
-
-
-
-
-
-
+// display user profile
 router.get('/profile', (req, res) => {
 	res.render('private/profile', {
 		 user: req.session.currentUser,
 		 style: 'private.css'
-		});
-});
-
-router.get('/trips', (req, res) => {
-	//Get trips from database
-	Trip.find()
-		.populate('participants')
-		.then((trips) => {
-			res.render('trips/all-trips', { trips, style: 'private.css' });
-		})
-		.catch((error) => {
-			console.log(error);
 		});
 });
 

@@ -3,11 +3,6 @@ require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const authRouter = require("./routes/auth.routes");
-const privateRouter = require('./routes/private.routes');
-
 var app = express();
 
 // Functional curling style of loading configuration
@@ -16,8 +11,10 @@ require('./config/global')(app)
 
 const isLoggedIn = require('./middleware/isLoggedIn');
 
+const indexRouter = require('./routes/index');
+const authRouter = require("./routes/auth.routes");
+const privateRouter = require('./routes/private.routes');
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/auth', authRouter)
 app.use('/private', isLoggedIn, privateRouter);
 

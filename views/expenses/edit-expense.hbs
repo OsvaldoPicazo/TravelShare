@@ -1,0 +1,33 @@
+<h1>Edit Expense</h1>
+
+<form action='/private/trips/{{expense.trip._id}}/expenses/{{expense._id}}/edit' method='POST'>
+
+  <label for="description">Description:</label>
+  <input type="text" name="description" id="description" value="{{expense.description}}" required>
+
+  <br>
+  <label for="category">Category:</label>
+  <select name="category" id="category" selected="{{expense.category}}">
+    <option value="General">General</option>
+    <option value="Accommodation">Accommodation</option>
+    <option value="Transport">Transport</option>
+    <option value="Food & Drink">Food & Drink</option>
+  </select>
+
+  <br>
+  <label for="cost">Cost:</label>
+  <input type="text" name="cost" id="cost" value="{{expense.cost}}" required/>  
+  
+  <br>
+  <label for='contributors'>Contributors</label>
+  <select name='contributors' id="contributors" multiple>
+      <option disable selected value="" >Select contributors</option>
+      {{#each expense.trip.participants}}
+          <option value="{{this._id}}">{{this.username}}</option>
+      {{/each}}
+  </select>
+
+  <br>
+  <button type="submit">Save</button>
+
+</form>
