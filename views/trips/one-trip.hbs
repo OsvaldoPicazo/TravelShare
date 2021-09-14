@@ -12,6 +12,13 @@
   <p>{{username}}</p>
 {{/each}}
 <br>
+
+<a href="/private/trips/{{trip._id}}/edit"><button>Edit</button></a>
+
+<form action="/private/trips/{{trip._id}}/delete" method="POST">
+    <button type="submit">Delete</button>
+</form>
+
 <br>
 <p>Total Expenses: {{trip.totalExpenses}}</p>
 

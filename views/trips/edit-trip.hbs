@@ -1,0 +1,31 @@
+<h1>Edit Trip</h1>
+
+
+<form action="/private/trips/{{trip._id}}/edit" method='POST' enctype="multipart/form-data">
+
+  <label for="name">Name:</label>
+  <input type="text" name="name" id="name" value="{{trip.name}}" required />
+
+  <label for="description">Description: </label>
+  <textarea type="text" name="description" id="description" required>{{trip.description}}</textarea>
+
+  <br>
+  <label for='participants'>Participants</label>
+  <select name='participants' id="participants" multiple>
+      <option disable selected value="" >Select participants</option>
+      {{#each allUsers}}
+          <option value="{{this._id}}">{{this.username}}</option>
+      {{/each}}
+  </select>
+
+<label for="imageUrl">Image:</label>
+<input type="file" name="imageUrl" id="imageUrl" value="{{trip.imageUrl}}"/>
+
+  <button type="submit">Save</button>
+
+</form>
+
+
+{{#if errorMessage}}
+  <p>{{errorMessage}}</p>
+{{/if}}
