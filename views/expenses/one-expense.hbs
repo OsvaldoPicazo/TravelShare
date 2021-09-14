@@ -1,0 +1,20 @@
+<h1>Expense Details</h1>
+  
+
+<h2>Description: {{expense.description}}</h2>
+
+<p>Cost: {{expense.cost}}</p>
+<p>Category: {{expense.category}}</p>
+<p>Paid by: {{expense.user.username}}</p>
+<p>Contributors: </p>
+    {{#each expense.contributors}}
+    <p>{{this.username}}</p>
+    {{/each}}
+<p>Trip: {{expense.trip.name}}</p>
+
+<a href="/private/trips/{{expense.trip._id}}/expenses/{{expense._id}}/edit"><button>Edit</button></a>
+
+<form action="/private/trips/{{expense.trip._id}}/expenses/{{expense._id}}/delete" method="POST">
+    <button type="submit">Delete</button>
+</form>
+    

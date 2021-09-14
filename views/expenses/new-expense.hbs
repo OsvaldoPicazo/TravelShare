@@ -1,0 +1,32 @@
+<h2>Add an expense:</h2>
+
+<form action='/private/trips/{{trip._id}}/expenses/add' method='POST'>
+
+  <label for="description">Description: </label>
+  <input type="text" name="description" id="description" required>
+
+  <br>
+  <label for="category">Category:</label>
+  <select name="category" id="category">
+    <option value="General" selected>General</option>
+    <option value="Accommodation">Accommodation</option>
+    <option value="Transport">Transport</option>
+    <option value="Food & Drink">Food & Drink</option>
+  </select>
+
+  <br>
+  <label for="cost">Cost:</label>
+  <input type="text" name="cost" id="cost" required/>  
+
+  <label for='contributors'>Contributors</label>
+  <select name='contributors' id="contributors" multiple>
+      <option disable selected value="" >Select contributors</option>
+      {{#each trip.participants}}
+          <option value="{{this._id}}">{{this.username}}</option>
+      {{/each}}
+  </select>
+
+  <br>
+  <button type="submit">Add expense</button>
+
+</form>
