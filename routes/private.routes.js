@@ -202,7 +202,6 @@ router.route('/trips/add')
 		imageUrl,
 		participants,
 		totalExpenses : 0,
-		balances
 	})
 	.then((createdTrip) => {
 		res.redirect('/private/trips');
