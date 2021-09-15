@@ -187,16 +187,17 @@ router.route('/trips/:id/edit')
 		.catch((error)=> {console.log(error)})
 	})
 	.post(fileUploader.single("imageUrl"), (req, res) => {
-		const tripId = req.params.id
-		const { name, description, participants} = req.body;
+		//This code need more work
 		//Get the form data from the body
-		// let image = req.params.imageUrl
 		// console.log("old imageeee", image)
+		// let image = req.params.imageUrl
 		// let {imageUrl} = req.file.path;
 		// console.log(req.body, req.file)
 		// if(req.file) {
-		// 	 imageUrl = req.file.path
-		// } 
+			// 	 imageUrl = req.file.path
+			// } 
+		const tripId = req.params.id
+		const { name, description, participants} = req.body;
 		Trip.findByIdAndUpdate(
 			tripId,
 			{
