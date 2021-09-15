@@ -36,7 +36,11 @@ const expenseSchema = new Schema({
 	contributors: [{ 
 		type: Schema.Types.ObjectId, 
 		ref: 'User'
-	}]
+	}],
+	// cost / number of contributors
+	partialCost: {
+		type: Number
+	}
 });
 
 const Expense = model('Expense', expenseSchema);

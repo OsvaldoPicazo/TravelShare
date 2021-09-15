@@ -9,6 +9,10 @@ const User = require('../models/User.model');
 const fileUploader = require("../config/cloudinary");
 const { populate } = require('../models/Trip.model');
 
+// import file to perform calculations
+const Utils = require("../public/scripts/utils");
+const utils = new Utils();
+
 // -----------------------------------------------------------
 // 				PRIVATE REQUESTS
 // -----------------------------------------------------------
@@ -41,6 +45,7 @@ router.route('/trips/:id/expenses/:expenseId/edit')
 	})
 	.post((req, res) => {
 		const  tripId  = req.params.id;
+		let partialCost = true;
 		const {
 			description,
 			category,
@@ -53,7 +58,8 @@ router.route('/trips/:id/expenses/:expenseId/edit')
 			description,
 			category,
 			cost,
-			contributors
+			contributors,
+			partialCost : cost / contributors.length
 			})
 		.then(updatedExpense => res.redirect(`/private/trips/${tripId}`))
 		.catch((error)=> {console.log(error)})
@@ -84,11 +90,14 @@ router.route('/trips/:id/expenses/add')
 			cost,
 			user: req.session.currentUser._id,
 			trip: tripId,
-			contributors
+			contributors,
+			partialCost : cost / contributors.length
 		})
 		.then(newExpense=> {
 			Trip.findByIdAndUpdate(tripId,
-			{$push: {expenses: newExpense._id}})
+			{
+				$push: {expenses: newExpense._id},
+			})
 			.then((trip) => {
 				res.redirect(`/private/trips/${tripId}`)
 			})
@@ -97,7 +106,7 @@ router.route('/trips/:id/expenses/add')
 			});
 		})
 	});
-
+	
 // view details of an specific expense
 router.get('/trips/:id/expenses/:expenseId', (req, res) => {
 	Expense.findById(req.params.expenseId)
@@ -109,41 +118,6 @@ router.get('/trips/:id/expenses/:expenseId', (req, res) => {
 	})
 	.catch((error) => {console.log(error)})
 })
-
-// add a new trip to the current user
-router.route('/trips/add')
-	.get((req, res) => {
-		User.find()
-		.then(allUsers => {
-          res.render('trips/new-trip', {allUsers})
-        })
-		.catch((error)=> {console.log(error)})
-	})
-	.post(fileUploader.single("imageUrl"), (req, res) => {
-
-		//Get the user id from the session
-		const userId = req.session.currentUser._id;
-		//Get the form data from the body
-		const { name, description, participants} = req.body;
-		
-		//if no image was uploaded then define imageUrl as undefined, in this way it will take the default image from the trip model
-		if (req.file === undefined) {
-			var imageUrl; 	
-		} else {
-			const imageUrl = req.file.path;
-		}
-
-	Trip.create({
-		name,
-		description,
-		imageUrl,
-		participants
-	})
-	.then((createdTrip) => {
-		res.redirect('/private/trips');
-	})
-	.catch((error) => {console.log(error)})
-});
 
 // delete trip
 router.post('/trips/:id/delete', (req, res)=> {
@@ -199,6 +173,42 @@ router.route('/trips/:id/edit')
 		.catch((error)=> {console.log(error)})
 	})
 
+// add a new trip to the current user
+router.route('/trips/add')
+	.get((req, res) => {
+		User.find()
+		.then(allUsers => {
+          res.render('trips/new-trip', {allUsers})
+        })
+		.catch((error)=> {console.log(error)})
+	})
+	.post(fileUploader.single("imageUrl"), (req, res) => {
+
+		//Get the user id from the session
+		const userId = req.session.currentUser._id;
+		//Get the form data from the body
+		const { name, description, participants} = req.body;
+		
+		//if no image was uploaded then define imageUrl as undefined, in this way it will take the default image from the trip model
+		if (req.file === undefined) {
+			var imageUrl; 	
+		} else {
+			const imageUrl = req.file.path;
+		}
+
+	Trip.create({
+		name,
+		description,
+		imageUrl,
+		participants,
+		totalExpenses : 0
+	})
+	.then((createdTrip) => {
+		res.redirect('/private/trips');
+	})
+	.catch((error) => {console.log(error)})
+});
+
 // display a specific trip
 router.get('/trips/:id', (req, res) => {
 	Trip.findById(req.params.id)
@@ -207,13 +217,17 @@ router.get('/trips/:id', (req, res) => {
 	.populate({
 		path: "expenses",
 		populate: {
-			path: 'user trip contributors'
+			path: 'user trip'
 		}
 	})
 	.then(trip=>{
-		const totalExpenses = trip.expenses.reduce((sum, el) => sum + el.cost,
-		0)
-		trip.totalExpenses = totalExpenses
+		const oneUser = trip.participants[0]._id
+		console.log("user iddddddddddddd: ", oneUser)
+		const balance = utils.tripPersonalBalance(trip, oneUser) 
+		console.log("user balanceeeeeeeeee: ", balance)
+		console.log("first validation: ", JSON.stringify(trip.expenses[0].user._id) === JSON.stringify(oneUser))
+		console.log("second validation: ", trip.expenses[0].contributors.includes(oneUser))
+		trip.totalExpenses = utils.tripTotalExpenses(trip)
 		res.render("trips/one-trip", {trip})
 	})
 	.catch((error) => {console.log(error)})
