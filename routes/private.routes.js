@@ -188,10 +188,10 @@ router.route('/trips/:id/edit')
 	})
 	.post(fileUploader.single("imageUrl"), (req, res) => {
 		const tripId = req.params.id
+		const { name, description, participants} = req.body;
 		//Get the form data from the body
 		// let image = req.params.imageUrl
 		// console.log("old imageeee", image)
-		const { name, description, participants} = req.body;
 		// let {imageUrl} = req.file.path;
 		// console.log(req.body, req.file)
 		// if(req.file) {
