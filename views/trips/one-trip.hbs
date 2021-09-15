@@ -19,6 +19,15 @@
     <button type="submit">Delete</button>
 </form>
 
+<div>
+    <form action="/private/trips/country" method="POST">
+        <label for="country"></label>
+        <input type="text" name="country" id="country" placeholder="Country" >
+
+        <button type="submit">Search for an Country</button>        
+    </form>
+</div>
+
 <br>
 <p>Total Expenses: {{trip.totalExpenses}}</p>
 
