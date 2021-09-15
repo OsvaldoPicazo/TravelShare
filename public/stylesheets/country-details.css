@@ -1,0 +1,342 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+h1 {
+  color: 15px;
+}
+.error {
+  background: #f02b63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.general-background {
+  background-color: #fbfcf8;
+  margin: 5px;
+  font-family: "Open Sans", sans-serif;
+}
+#navtext {
+  color: #fbfcf8;
+  font-size: 20px;
+}
+.navbarcolor {
+  background-color: #91d7a4;
+  border-color: #91d7a4;
+}
+.button-travel {
+  background-color: #91d7a4;
+  border-color: #91d7a4;
+  text-align: center;
+}
+#myInput {
+  background-image: url("/css/searchicon.png"); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+#myUL {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#myUL li a {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+.tabs {
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+  cursor: pointer;
+  display: block;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1em;
+  padding: 2rem 0;
+  text-align: center;
+}
+.tabs [class^="tab"] [type="radio"],
+.tabs [class*=" tab"] [type="radio"] {
+  border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.tabs [class^="tab"] [type="radio"]:hover,
+.tabs [class^="tab"] [type="radio"]:focus,
+.tabs [class*=" tab"] [type="radio"]:hover,
+.tabs [class*=" tab"] [type="radio"]:focus {
+  border-bottom: 1px solid #91d7a4;
+}
+.tabs [class^="tab"] [type="radio"]:checked,
+.tabs [class*=" tab"] [type="radio"]:checked {
+  border-bottom: 2px solid #91d7a4;
+}
+.tabs [class^="tab"] [type="radio"]:checked + div,
+.tabs [class*=" tab"] [type="radio"]:checked + div {
+  opacity: 1;
+}
+.tabs [class^="tab"] [type="radio"] + div,
+.tabs [class*=" tab"] [type="radio"] + div {
+  display: block;
+  opacity: 0;
+  padding: 2rem 0;
+  width: 90%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.tabs .tab-2 {
+  width: 50%;
+}
+.tabs .tab-2 [type="radio"] + div {
+  width: 200%;
+  margin-left: 200%;
+}
+.tabs .tab-2 [type="radio"]:checked + div {
+  margin-left: 0;
+}
+.tabs .tab-2:last-child [type="radio"] + div {
+  margin-left: 100%;
+}
+.tabs .tab-2:last-child [type="radio"]:checked + div {
+  margin-left: -100%;
+}
+#mapid {
+  height: 700px;
+  margin-bottom: 40px;
+}
+#mapidProfile {
+  width: 1000px;
+  height: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel_size {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 35px;
+  margin-bottom: 40px;
+  height: 600px;
+  width: 800px;
+}
+
+/*Error Page Styling*/
+#errorButtondiv {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  font-weight: bold;
+}
+
+.luis {
+  position: absolute;
+  height: 100px;
+  left: 70%;
+  top: 80%;
+}
+
+#sheep {
+  width: 500px;
+}
+#errorImg {
+  display: flex;
+  justify-content: center;
+}
+
+.container-error {
+  display: block;
+  text-align: center;
+}
+
+.errorPageNotFound {
+  display: block;
+  margin: auto;
+  flex-direction: column;
+}
+#catchPhraseError {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#text-button {
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 20px;
+}
+
+/* Error 500*/
+
+#errorLink {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#world {
+  width: 75%;
+}
+#catchPhrase {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+#logoId {
+  width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#marginText {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 17px;
+}
+#solid {
+  border-top: 3px solid #91d7a4;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.imageProfile {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+}
+.linkProfile {
+  color: #fbfcf8;
+}
+.buttonProfile {
+  display: flex;
+  justify-content: center;
+}
+.buttonMargin {
+  margin-right: 10px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+#colorLign {
+  border-color: #91d7a4;
+}
+.countryName {
+  font-size: 17px;
+}
+.btn-size {
+  padding: 2px;
+  font-size: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: red;
+  margin-left: 5px;
+}
+.marginTabs {
+  margin-bottom: 40px;
+}
+.linkCountry {
+  color: black;
+  text-decoration: none;
+}
+.borderCountry {
+  border: 2px solid #91d7a4;
+  padding: 15px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: 15px;
+  text-align: center;
+  border-radius: 20px;
+}
+#solidBorder {
+  border: 1px solid #91d7a4;
+  margin: 5px;
+  margin-bottom: 10px;
+}
+.titleH4 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 20px;
+}
+#pickCountry {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 15px;
+}
+.textCenter {
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  font-size: 20px;
+  text-align: center;
+}
+.lkdn {
+  margin-right: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.lkdntext {
+  font-size: 16px;
+  color: #91d7a4;
+}
+.buttonMarginAccount {
+  margin-right: 10px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+#btnBack {
+  color: white;
+  text-decoration: none;
+}
+#heightImg {
+  height: 50px;
+}

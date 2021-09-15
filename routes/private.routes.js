@@ -4,6 +4,7 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 const User = require('../models/User.model');
+const axios = require("axios");
 
 // define object to upload file to the cloud
 const fileUploader = require("../config/cloudinary");
@@ -115,7 +116,10 @@ router.route('/trips/add')
 	.get((req, res) => {
 		User.find()
 		.then(allUsers => {
-          res.render('trips/new-trip', {allUsers})
+          res.render('trips/new-trip', {
+			  allUsers,
+			  style: 'profile.css'
+			})
         })
 		.catch((error)=> {console.log(error)})
 	})
@@ -132,8 +136,8 @@ router.route('/trips/add')
 		} else {
 			const imageUrl = req.file.path;
 		}
-
-	Trip.create({
+	
+		Trip.create({
 		name,
 		description,
 		imageUrl,
@@ -144,65 +148,6 @@ router.route('/trips/add')
 	})
 	.catch((error) => {console.log(error)})
 });
-
-
-
-
-//-----------------------------------------------------------------------------------
-
-
-//COUNTRY DETAILS ROUTES
-router.get("/country/:id", (req, res, next) => {
-	const { id } = req.params;
-	countryModel
-	  .findById(id)
-	  .then((data) => {
-		let clientId = process.env.CLIENT_ID;
-		let { name } = data;
-		let url =
-		  "https://api.unsplash.com/search/photos?client_id=" +
-		  clientId +
-		  "&query=" +
-		  name;
-  
-		//make a request to the api
-  
-		axios
-		  .get(url)
-		  .then(function (response) {
-			if (response.data.total == 0) {
-			  res.render("country/country-details.hbs", {
-				msg: "Please enter a valid country name",
-			  });
-			} else {
-			  res.render("country/country-details.hbs", {
-				images: response.data.results,
-				data,
-				user: req.session.userInfo,
-			  });
-			}
-		  })
-		  .catch((err) => next(err));
-	  })
-	  .catch((err) => {
-		next(err);
-	  });
-  });
-
-
-
-
-
-
-
-
-
-
-//----------------------------------------------------------------------------------------------
-
-
-
-
 
 // delete trip
 router.post('/trips/:id/delete', (req, res)=> {
@@ -244,19 +189,40 @@ router.route('/trips/:id/edit')
 	.post(fileUploader.single("imageUrl"), (req, res) => {
 		const tripId = req.params.id
 		//Get the form data from the body
+		// let image = req.params.imageUrl
+		// console.log("old imageeee", image)
 		const { name, description, participants} = req.body;
-		i
+		// let {imageUrl} = req.file.path;
+		// console.log(req.body, req.file)
+		// if(req.file) {
+		// 	 imageUrl = req.file.path
+		// } 
 		Trip.findByIdAndUpdate(
 			tripId,
 			{
 				name,
 				description,
+				//imageUrl,
 				participants
 			})
 		.then(updatedTrip => {
 			res.redirect(`/private/trips/${tripId}`)
 		})
 		.catch((error)=> {console.log(error)})
+	})
+
+// search for a country
+	router.post('/trips/country',(req, res)=>{
+		const countryName = req.body.country
+		axios
+		.get(`https://restcountries.eu/rest/v2/name/${countryName}`)
+	    .then(response => {
+		   const data = response.data[0];
+		   res.render('countries/country-details', {
+		   style: 'country-details.css', data 
+		})
+	  })
+	  .catch(err => console.log(err));
 	})
 
 // display a specific trip
