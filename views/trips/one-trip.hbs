@@ -31,7 +31,7 @@
 <br>
 <p>Total Expenses: {{trip.totalExpenses}}</p>
 
-<a href="/private/trips/{{this.trip._id}}/expenses/add"><button>New Expense</button></a>
+<a href="/private/trips/{{trip.trip._id}}/expenses/add"><button>New Expense</button></a>
 
 {{#if trip.expenses}}
 
@@ -51,7 +51,7 @@
         <p>{{this.username}}</p>
       {{/each}} --}}
     
-    <a href="/private/trips/{{this.trip._id}}/expenses/{{this._id}}"><button>Details</button></a>
+    <a href="/private/trips/{{trip.trip._id}}/expenses/{{this._id}}"><button>Details</button></a>
   
   {{/each}}
 
