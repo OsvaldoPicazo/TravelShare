@@ -4,6 +4,7 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 const User = require('../models/User.model');
+const axios = require("axios");
 
 // define object to upload file to the cloud
 const fileUploader = require("../config/cloudinary");
@@ -184,6 +185,8 @@ router.route('/trips/:id/edit')
 		.catch((error)=> {console.log(error)})
 	})
 
+
+
 // add a new trip to the current user
 router.route('/trips/add')
 	.get((req, res) => {
@@ -219,6 +222,20 @@ router.route('/trips/add')
 	})
 	.catch((error) => {console.log(error)})
 });
+
+// search for a country
+router.post('/trips/country',(req, res)=>{
+	const countryName = req.body.country
+	axios
+	.get(`https://restcountries.eu/rest/v2/name/${countryName}`)
+	.then(response => {
+	   const data = response.data[0];
+	   res.render('countries/country-details', {
+	   style: 'country-details.css', data 
+	})
+  })
+  .catch(err => console.log(err));
+})
 
 // display a specific trip
 router.get('/trips/:id', (req, res) => {
