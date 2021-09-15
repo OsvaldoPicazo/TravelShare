@@ -250,11 +250,8 @@ router.get('/trips/:id', (req, res) => {
 	})
 	.then(trip=>{
 		const oneUser = trip.participants[0]._id
-		console.log("user iddddddddddddd: ", oneUser)
 		const balance = utils.tripPersonalBalance(trip, oneUser) 
 		console.log("user balanceeeeeeeeee: ", balance)
-		console.log("first validation: ", JSON.stringify(trip.expenses[0].user._id) === JSON.stringify(oneUser))
-		console.log("second validation: ", trip.expenses[0].contributors.includes(oneUser))
 		trip.totalExpenses = utils.tripTotalExpenses(trip)
 		res.render("trips/one-trip", {trip})
 	})
