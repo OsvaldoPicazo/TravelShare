@@ -26,7 +26,7 @@ const tripSchema = new Schema({
 	}],
 	// total expenses 
 	totalExpenses: {
-		type: Number
+		type: Number,
 	}
 });
 

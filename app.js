@@ -14,11 +14,16 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 const indexRouter = require('./routes/index');
 const authRouter = require("./routes/auth.routes");
 const privateRouter = require('./routes/private.routes');
-const expensesRouter = require('./routes/expenses.routes');
+const tripRouter = require('./routes/trip.routes');
+const expenseRouter = require('./routes/expense.routes');
+const profileRouter = require('./routes/profile.routes');
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter)
-app.use('/private', isLoggedIn, privateRouter);
-app.use('/expenses', isLoggedIn, expensesRouter);
+app.use('/private/trips', isLoggedIn, tripRouter);
+app.use('/private/expenses', isLoggedIn, expenseRouter);
+app.use('/private/profile', isLoggedIn, profileRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

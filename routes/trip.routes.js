@@ -4,6 +4,7 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 const User = require('../models/User.model');
+const Balance = require('../models/Balance.model');
 const axios = require("axios");
 
 // define object to upload file to the cloud
@@ -15,117 +16,11 @@ const Utils = require("../public/scripts/utils");
 const utils = new Utils();
 
 // -----------------------------------------------------------
-// 				Expense Routes
-// -----------------------------------------------------------
-
-// delete an expense
-router.post('/trips/:id/expenses/:expenseId/delete', (req, res)=> {
-	const tripId = req.params.id;
-    Expense.findByIdAndDelete(req.params.expenseId)
-    .then(deletedExpense => res.redirect(`/private/trips/${tripId}`))
-    .catch(error=> console.log(error))
-})
-
-// edit an expense
-router.route('/trips/:id/expenses/:expenseId/edit')
-	.get((req, res) => {
-		Expense.findById(req.params.expenseId)
-		.populate("user")
-		.populate("contributors")	
-		.populate("trip")
-		.populate({
-			path: "trip",
-			populate: {
-				path: 'participants'
-			}
-		})
-		.then(expense => {
-			res.render('expenses/edit-expense', {expense})
-		})
-		.catch((error)=> {console.log(error)})
-	})
-	.post((req, res) => {
-		const  tripId  = req.params.id;
-		let partialCost = true;
-		const {
-			description,
-			category,
-			cost,
-			contributors
-		} = req.body
-		Expense.findByIdAndUpdate(
-			req.params.expenseId, 
-			{
-			description,
-			category,
-			cost,
-			contributors,
-			partialCost : cost / contributors.length
-			})
-		.then(updatedExpense => res.redirect(`/private/trips/${tripId}`))
-		.catch((error)=> {console.log(error)})
-	})
-
-// add a new expense
-router.route('/trips/:id/expenses/add')
-	.get((req, res) => {
-		Trip.findById(req.params.id)
-		.populate("participants")
-		.then(trip => {
-			res.render('expenses/new-expense', {trip})
-		})
-		.catch((error)=> {console.log(error)})
-	})	
-	.post((req, res) => {
-		const  tripId  = req.params.id;
-		const {
-			description,
-			category,
-			cost,
-			contributors
-		} = req.body
-
-		Expense.create({
-			description,
-			category,
-			cost,
-			user: req.session.currentUser._id,
-			trip: tripId,
-			contributors,
-			partialCost : cost / contributors.length
-		})
-		.then(newExpense=> {
-			Trip.findByIdAndUpdate(tripId,
-			{
-				$push: {expenses: newExpense._id},
-			})
-			.then((trip) => {
-				res.redirect(`/private/trips/${tripId}`)
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		})
-	});
-	
-// view details of an specific expense
-router.get('/trips/:id/expenses/:expenseId', (req, res) => {
-	Expense.findById(req.params.id)
-	.populate("user")
-	.populate("contributors")	
-	.populate("trip")
-	.then(expense => {
-		res.render('expenses/one-expense', {expense})
-	})
-	.catch((error) => {console.log(error)})
-})
-
-// -----------------------------------------------------------
 // 				TRIP ROUTES
 // -----------------------------------------------------------
 
 // delete trip
-router.post('/trips/:id/delete', (req, res)=> {
+router.post('/:id/delete', (req, res)=> {
 	const tripId = req.params.id;
     Trip.findByIdAndDelete(tripId)
     .then(deletedTrip => {
@@ -141,7 +36,7 @@ router.post('/trips/:id/delete', (req, res)=> {
 })
 
 // edit a trip
-router.route('/trips/:id/edit')
+router.route('/:id/edit')
 	.get((req, res) => {
 		Trip.findById(req.params.id)
 		.populate("participants")
@@ -189,8 +84,9 @@ router.route('/trips/:id/edit')
 		.catch((error)=> {console.log(error)})
 	})
 
+
 // add a new trip to the current user
-router.route('/trips/add')
+router.route('/add')
 	.get((req, res) => {
 		User.find()
 		.then(allUsers => {
@@ -226,7 +122,7 @@ router.route('/trips/add')
 });
 
 // search for a country
-router.post('/trips/country',(req, res)=>{
+router.post('/country',(req, res)=>{
 	const countryName = req.body.country
 	axios
 	.get(`https://restcountries.eu/rest/v2/name/${countryName}`)
@@ -240,7 +136,7 @@ router.post('/trips/country',(req, res)=>{
 })
 
 // display a specific trip
-router.get('/trips/:id', (req, res) => {
+router.get('/:id', (req, res) => {
 	Trip.findById(req.params.id)
 	.populate("participants")
 	.populate("expenses")
@@ -251,17 +147,41 @@ router.get('/trips/:id', (req, res) => {
 		}
 	})
 	.then(trip=>{
-		//const oneUser = trip.participants[0]._id
-		//const balance = utils.tripPersonalBalance(trip, oneUser) 
-		//console.log("user balanceeeeeeeeee: ", balance)
-		trip.totalExpenses = utils.tripTotalExpenses(trip)
-		res.render("trips/one-trip", {trip})
+        Trip.findByIdAndUpdate(trip._id,
+			{
+                totalExpenses: utils.tripTotalExpenses(trip)
+			})
+		.then(updatedTrip => {
+            // Balance.deleteMany({trip: updatedTrip._id})
+            // .then(deletedBalances => {
+            //     for(element of updatedTrip.participants) {
+            //         Balance.create({
+            //             user: element,
+            //             trip: updatedTrip._id,
+            //             amount: utils.tripPersonalBalance(updatedTrip, element)       
+            //         })
+            //     } 
+            // })
+            // .catch((error)=> {console.log(error)})
+
+            // Generate Balances
+            const balances = []
+            for(const participant of trip.participants) {
+                balances.push({
+                    user: participant.username,
+                    amount: utils.tripPersonalBalance(trip, participant._id)
+                })
+            }
+            console.log("balancessssssssssssss: ", balances)
+            res.render("trips/one-trip", {trip, balances})
+        })
+		.catch((error)=> {console.log(error)})
 	})
 	.catch((error) => {console.log(error)})
 })
 
 // display all the trips of the current user 
-router.get('/trips', (req, res) => {
+router.get('/', (req, res) => {
 	const userId = req.session.currentUser._id
 	
 	Trip.find({ participants: userId })
@@ -271,18 +191,6 @@ router.get('/trips', (req, res) => {
 		})
 		.catch((error) => {
 			console.log(error);
-		});
-});
-
-// -----------------------------------------------------------
-// 				PROFILE ROUTES
-// -----------------------------------------------------------
-
-// display user profile
-router.get('/profile', (req, res) => {
-	res.render('private/profile', {
-		 user: req.session.currentUser,
-		 style: 'profile.css'
 		});
 });
 

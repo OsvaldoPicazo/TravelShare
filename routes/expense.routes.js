@@ -4,32 +4,30 @@ const router = express.Router();
 const Trip = require('../models/Trip.model');
 const Expense = require('../models/Expense.model');
 const User = require('../models/User.model');
-const axios = require("axios");
-
-// define object to upload file to the cloud
-const fileUploader = require("../config/cloudinary");
-const { populate } = require('../models/Trip.model');
 
 // import file to perform calculations
 const Utils = require("../public/scripts/utils");
 const utils = new Utils();
 
 // -----------------------------------------------------------
-// 				Expense REQUESTS
+// 				Expense Routes
 // -----------------------------------------------------------
 
 // delete an expense
-router.post('/trips/:id/expenses/:expenseId/delete', (req, res)=> {
-	const tripId = req.params.id;
-    Expense.findByIdAndDelete(req.params.expenseId)
-    .then(deletedExpense => res.redirect(`/private/trips/${tripId}`))
+router.post('/:id/delete', (req, res)=> {
+	//const tripId = req.params.id;
+    Expense.findByIdAndDelete(req.params.id)
+    .then(deletedExpense => {
+        const tripId = deletedExpense.trip
+        res.redirect(`/private/trips/${tripId}`)
+    })
     .catch(error=> console.log(error))
 })
 
 // edit an expense
-router.route('/trips/:id/expenses/:expenseId/edit')
+router.route('/:id/edit')
 	.get((req, res) => {
-		Expense.findById(req.params.expenseId)
+		Expense.findById(req.params.id)
 		.populate("user")
 		.populate("contributors")	
 		.populate("trip")
@@ -45,8 +43,6 @@ router.route('/trips/:id/expenses/:expenseId/edit')
 		.catch((error)=> {console.log(error)})
 	})
 	.post((req, res) => {
-		const  tripId  = req.params.id;
-		let partialCost = true;
 		const {
 			description,
 			category,
@@ -54,7 +50,7 @@ router.route('/trips/:id/expenses/:expenseId/edit')
 			contributors
 		} = req.body
 		Expense.findByIdAndUpdate(
-			req.params.expenseId, 
+			req.params.id, 
 			{
 			description,
 			category,
@@ -62,14 +58,18 @@ router.route('/trips/:id/expenses/:expenseId/edit')
 			contributors,
 			partialCost : cost / contributors.length
 			})
-		.then(updatedExpense => res.redirect(`/private/trips/${tripId}`))
+		.then(updatedExpense => {
+            const tripId = updatedExpense.trip
+            res.redirect(`/private/trips/${tripId}`)
+        })
 		.catch((error)=> {console.log(error)})
 	})
 
 // add a new expense
-router.route('/trips/:id/expenses/add')
+router.route('/:id/add')
 	.get((req, res) => {
-		Trip.findById(req.params.id)
+        const  tripId  = req.params.id;
+		Trip.findById(tripId)
 		.populate("participants")
 		.then(trip => {
 			res.render('expenses/new-expense', {trip})
@@ -97,7 +97,8 @@ router.route('/trips/:id/expenses/add')
 		.then(newExpense=> {
 			Trip.findByIdAndUpdate(tripId,
 			{
-				$push: {expenses: newExpense._id},
+				$push: { expenses: newExpense._id}
+                //,$inc: { totalExpenses: newExpense.cost}
 			})
 			.then((trip) => {
 				res.redirect(`/private/trips/${tripId}`)
@@ -109,7 +110,7 @@ router.route('/trips/:id/expenses/add')
 	});
 	
 // view details of an specific expense
-router.get('/trips/:id', (req, res) => {
+router.get('/:id', (req, res) => {
 	Expense.findById(req.params.id)
 	.populate("user")
 	.populate("contributors")	
@@ -119,3 +120,5 @@ router.get('/trips/:id', (req, res) => {
 	})
 	.catch((error) => {console.log(error)})
 })
+
+module.exports = router;
