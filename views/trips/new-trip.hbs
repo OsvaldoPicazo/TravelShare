@@ -1,31 +1,59 @@
-<h1>Create a Trip</h1>
+<div class="body-container">
+  <h1 id="all-trips-title">Trips</h1>
+</div>
+
+<div class="floating-container">
+  <h2 class="floating-container-title">New Trip</h2>
+
+  <form class="floating-container-content" action="/private/trips/add" method='POST' enctype="multipart/form-data">
+
+    <div class="floating-container-content-data">
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for="name">Location:</label>
+          <input type="text" name="name" id="name" required />  
+        </div>
+
+        <div>
+          <label for="description">Description: </label>
+          <textarea type="text" name="description" id="description" required></textarea>
+        </div>
+
+      </div>
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for='participants'>Friends:</label>
+          <select name='participants' id="participants" multiple>
+              <option disable selected value="" >Select friends</option>
+              {{#each allUsers}}
+                  <option value="{{this._id}}">{{this.username}}</option>
+              {{/each}}
+          </select>
+        </div>
+        
+        <div>
+          <label for="imageUrl">Cover Photo:</label>
+          <input type="file" name="imageUrl" id="imageUrl">  
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="floating-container-button">
+      <button type="submit">Add Trip</button>
+    </div>
+
+  </form>
 
 
-<form action="/private/trips/add" method='POST' enctype="multipart/form-data">
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
 
-  <label for="name">Name:</label>
-  <input type="text" name="name" id="name" required />
+</div>
 
-  <label for="description">Description: </label>
-  <textarea type="text" name="description" id="description" required></textarea>
-
-  <br>
-  <label for='participants'>Participants</label>
-  <select name='participants' id="participants" multiple>
-      <option disable selected value="" >Select participants</option>
-      {{#each allUsers}}
-          <option value="{{this._id}}">{{this.username}}</option>
-      {{/each}}
-  </select>
-
-  <label for="imageUrl">Image:</label>
-  <input type="file" name="imageUrl" id="imageUrl">  
-
-  <button type="submit">Create Trip</button>
-
-</form>
-
-
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}

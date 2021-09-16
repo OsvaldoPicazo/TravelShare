@@ -301,3 +301,93 @@ color: #282828;
 .all-trips-single-line div {
   text-align: right;
 }
+
+/* ------------------------------------------ */
+/*         Floating container                 */
+/* ------------------------------------------ */
+
+
+.floating-container {
+  position: absolute;
+  width: 1008px;
+  height: 759px;
+  left: 334px;
+  top: 70px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+  filter: drop-shadow(0px 6px 16px rgba(0, 0, 0, 0.08));
+}
+
+.floating-container-title {
+  position: absolute;
+  left: 28.47%;
+  right: 30.95%;
+  top: 7.64%;
+  bottom: 87.09%;
+  
+  /* H2/medium */
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  /* identical to box height, or 133% */
+  
+  text-align: center;
+  
+  color: #000000;  
+}
+
+.floating-container-content{
+  position: absolute;
+  width: 1008px;
+  height: 569px;
+  left: 0px;
+  top: 190px; 
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
+.floating-container-content-data {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.floating-container-content-column {
+  height: 250px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.floating-container-button button{
+  width: 212px;
+  height: 40px;
+  background: #85A5FF;
+  /* drop-shadow / button-primary */
+  
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;  
+
+  font-family: Roboto;
+  font-style: normal; 
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+}
+
+.floating-container-button{
+  display: flex;
+  justify-content: center;
+}
+
+.floating-container-content-column div {
+  display: flex;
+  flex-flow: column;
+}
+
