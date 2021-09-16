@@ -186,8 +186,21 @@ router.get('/', (req, res) => {
 	
 	Trip.find({ participants: userId })
 		.populate('participants')
+		.populate("expenses")
+		.populate({
+			path: "expenses",
+			populate: {
+				path: 'user trip'
+			}
+		})
 		.then((trips) => {
-			res.render('trips/all-trips', { trips, style: 'trips.css' });
+
+			//calculate overall Expenses
+			let overallExpense = 0;
+			for(const eachTrip of trips) {
+				overallExpense += eachTrip.totalExpenses;
+			}
+			res.render('trips/all-trips', { trips, overallExpense, style: 'trips.css' });
 		})
 		.catch((error) => {
 			console.log(error);
