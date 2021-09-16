@@ -1,12 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body {
-  position: relative;
-  width: 1920px;
-  height: 900px;
-  background: #85A5FF;
+ font-family: Roboto;
+}
 
-  
+h1 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 112px;
+  color: black;
+  margin: 0;
+}
+
+h2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;  
+  margin: 0;
+}
+
+h4 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: black;  
+  margin: 0;
+}
+
+h5 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;  
+  color: black; 
+  margin: 0;
 }
 
 
@@ -175,4 +210,94 @@ color: #282828;
  }
 
  
+.body-container {
+  width: 1204px;
+  height: 900px;
+  position: absolute;
+  left: 236px;
+  top: 0;
+  margin-bottom: 0;
+  display: flex;
+  flex-flow: column;
+}
 
+#all-trips-title {
+  background-image: url("/images/all-trips-1204x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#all-trips-container {
+  width: 1204px;
+  height: 640px;
+  display: flex;
+  flex-flow: column;
+}
+
+#all-trips-menu {
+  width: 960px;
+  height: 88px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#all-trips-content {
+  width: 960px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+}
+
+#all-trips-single {
+  margin: 50px 0 0 0;
+}
+
+.all-trips-single-line {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #F0F0F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.all-trips-single-line a {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;
+  margin: 0;
+}
+
+.all-trips-single-line div {
+  text-align: right;
+}
