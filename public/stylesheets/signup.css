@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 body {
-  
-  width: 1920px;
-  height: 900px;
-  background: #85A5FF;
-
-  
+  font-family: Roboto;
 }
+
+#signup {
+  display: none;
+}
+#logout {
+  display: none;
+}
+
+
 
 #navbar-box {
   background-color: #434343;
@@ -20,87 +24,78 @@ body {
   bottom: 0%;
 }
 
-
-
 #sideNav {
   position: absolute;
-  left: 30.08%;
-  right: 28.39%;
+  left: 25%;
   top: 15%;
   bottom: 34.11%;
   background-color: #434343;
-
 }
 
-
-
 #frame a {
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 8px;
 
-position: static;
-width: 110px;
-height: 44px;
-left: 35px;
-top: 152px;
+  position: static;
+  width: 110px;
+  height: 44px;
+  left: 35px;
+  top: 152px;
 
+  /* Inside Auto Layout */
 
-/* Inside Auto Layout */
-
-flex: none;
-order: 2;
-flex-grow: 0;
-margin: 32px 0px;
-font-family: Roboto;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 32px 0px;
+  font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
-#sideLogo{
+#sideLogo {
   position: absolute;
   left: 25%;
   right: 29.66%;
   top: 3%;
   bottom: 80.89%;
 }
+
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 16px;
+
+  position: absolute;
+  left: 10%;
  
+  top: 60%;
+  bottom: 21.67%;
 
-
-#login{
-  
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 5px 16px;
-
-position: absolute;
-left: 5%;
-right: 18.22%;
-top: 60%;
-bottom: 21.67%;
-
-background: #CCDC68;
-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
-width: 151px;
-height: 40px;
-border-radius: 4px;
-font-family: Roboto;
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 22px;
-text-align: center;
-color: #282828;
+  background: #ccdc68;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  width: 151px;
+  height: 40px;
+  border-radius: 4px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 22px;
+  text-align: center;
+  color: #282828;
+  text-decoration: none;
 }
 
-#signup{
+#signup {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,115 +106,136 @@ color: #282828;
   width: 151px;
   height: 40px;
   border-radius: 4px;
-  left: 5%;
+  left: 10%;
   right: 18.22%;
   top: 68%;
   bottom: 21.67%;
-  background: #85A5FF;
+  background: #85a5ff;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
-  border-radius:f 4px;
+  border-radius: f 4px;
   font-family: Roboto;
   font-style: normal;
-   font-weight: 500;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 24px;
   line-height: 22px;
   text-align: center;
   color: #282828;
+  text-decoration: none;
 }
-  
 
-
-
- #loginForm{
+#loginForm {
   display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-end;
-	align-content: flex-end;
- }
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  align-content: flex-end;
+}
 
- #mainpage{
-  
-  position: fixed;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    align-content: space-around;
-    width: 900px;
-    height: 900px;
-    left: 650px;
-  
- }
 
- #getstartet{
-
+.body-cont {
   display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: space-between;
- } 
-
- 
-#mainText{
-
-
-width: 339px;
-height: 80px;
-
-font-family: Roboto;
-font-style:normal;
-font-weight: 500;
-font-size: 30px;
-line-height: 40px;
-
-text-align: center;
-color: #FAFAFA;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 1204px;
+  height: 900px;
+  position: absolute;
+  left: 236px;
+  top: 0;
+  margin-bottom: 0;
+  flex-flow: column;
+  background-image: url("/images/SignUpBackground.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
 }
 
-#getstartet-conteiner{
+#signupForm {
+  width: 600px;
+  height: 500px;
+  background: #ffffff;
+  border-radius: 16px;
   display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-items: stretch;
-	align-content: center;
-
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
 }
 
-
-  #getStartet {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    padding: 8px 16px;
-    position: static;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background: #CCDC68;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
-    border-radius: 4px;
-    width: 267px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 38px;
-    line-height: 46px;
-    text-align: center;
-    color: #FFFFFF;
-    margin: 8px 0px;
-    text-decoration: none;
-    left: 50px;
-    align-content: center;
-    flex-wrap: nowrap;
+#form {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
 }
 
-#logout {
-  display: none;
- } 
+#form label {
+  width: 70px;
+  text-align: left;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  /* identical to box height, or 157% */
+
+  /* Character / Title .85 */
+
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.textboxid {
+  width: 400px;
+  height: 32px;
+}
+
+#email {
+  position: relative;
+  left: 14px;
+}
+
+button {
+  width: 212px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 16px;
+
+  /* Primary / Darker Blue */
+
+  background: #85a5ff;
+  /* drop-shadow / button-primary */
+
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 0px;
+
+  
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height, or 122% */
+
+  text-align: center;
+
+  /* Character / Primary(inverse) */
+
+  color: #ffffff;
+}

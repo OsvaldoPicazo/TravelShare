@@ -1,19 +1,30 @@
-<h1>Sign up form</h1>
+<div class="body-cont">
 
-<form action="/auth/signup" method='POST'>
+  <div id="signupForm">
+    <h1>Sign up </h1>
 
-  <label for="username">Username:</label>
-  <input type="text" name="username" id="username" required/>
+    <form action="/auth/signup" method="POST" id="form">
 
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email" required />
+      
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" class="textboxid" required />
+      
 
-  <label for="password">Password:</label>
-  <input type="password" name="password" id="password" required />
+        <label for="email">Email:</label>
+        <input type="email" name="email"  class="textboxid" required />
 
-  <button type="submit">Sign up</button>
-</form>
+     
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" class="textboxid" required />
+      <
 
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
+      <div id="signupButon">
+        <button type="submit">Sign up</button>
+      </div>
+    </form>
+
+    {{#if errorMessage}}
+      <p>{{errorMessage}}</p>
+    {{/if}}
+  </div>
+</div>

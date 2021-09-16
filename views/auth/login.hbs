@@ -1,13 +1,15 @@
-<h1>Log in form</h1>
+<div class="body-cont">
+  <div id="signupForm">
+    <h1>Log in form</h1>
 
 
-<form action="/auth/login" method='POST'>
+<form action="/auth/login" method='POST' id="form">
 
   <label for="username">Username:</label>
-  <input type="text" name="username" id="username" required/>
+  <input type="text" name="username" id="username" class="textboxid" required/>
 
   <label for="password">Password:</label>
-  <input type="password" name="password" id="password" required />
+  <input type="password" name="password" id="password" class="textboxid" required />
 
   <button type="submit">Log in</button>
 </form>
@@ -15,3 +17,6 @@
 {{#if errorMessage}}
   <p>{{errorMessage}}</p>
 {{/if}}
+  </div>
+
+</div>
