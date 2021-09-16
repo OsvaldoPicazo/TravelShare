@@ -1,12 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: rgb(110, 107, 108);
-  }
-  
-  a {
-    color: #00B7FF;
-  }
+  position: relative;
+  width: 1920px;
+  height: 900px;
+  background: #85A5FF;
 
   
+}
+
+
+
+#navbar-box {
+  background-color: #434343;
+  width: 236px;
+  height: 900px;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+
+
+#sideNav {
+  position: absolute;
+  left: 30.08%;
+  right: 28.39%;
+  top: 15%;
+  bottom: 34.11%;
+  background-color: #434343;
+
+}
+
+
+
+#frame a {
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 8px;
+
+position: static;
+width: 110px;
+height: 44px;
+left: 0px;
+top: 152px;
+
+
+/* Inside Auto Layout */
+
+flex: none;
+order: 2;
+flex-grow: 0;
+margin: 32px 0px;
+
+}
+
+ a{
+  position: static;
+  width: 65px;
+  height: 28px;
+  left: 8px;
+  top: 8px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-decoration: none;
+  /* Primary / White */
+  color: #FFFFFF;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 10px;
+ }
+
+#sideLogo{
+  position: absolute;
+  left: 25%;
+  right: 29.66%;
+  top: 3%;
+  bottom: 80.89%;
+}
+ 
+
+
+#login{
   
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5px 16px;
+
+position: absolute;
+left: 5%;
+right: 18.22%;
+top: 60%;
+bottom: 21.67%;
+
+background: #CCDC68;
+box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+width: 151px;
+height: 40px;
+border-radius: 4px;
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+color: #282828;
+}
+
+#signup{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 16px;
+
+  position: absolute;
+  width: 151px;
+  height: 40px;
+  border-radius: 4px;
+  left: 5%;
+  right: 18.22%;
+  top: 68%;
+  bottom: 21.67%;
+  background: #85A5FF;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;
+  font-family: Roboto;
+  font-style: normal;
+   font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #282828;
+}
+  
+
+#logout {
+  display: none;
+ } 
+
+ #loginForm{
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-end;
+	align-content: flex-end;
+ }
+
+ 
+ #logout {
+  display: none;
+ } 
+
+ #mainpage{
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: space-between;
+  width: 1440;
+  height: 900;
+ }
+
+ 
+

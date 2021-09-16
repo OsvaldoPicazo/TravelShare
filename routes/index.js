@@ -11,10 +11,8 @@ router.get('/', isNotLoggedIn, function(req, res, next) {
   User.find().then((users)=>
   res.render('index', { 
 	  title: 'Sum',
-	  style: 'index.css', users })
+	  style: 'index.css'})
   )
 });
-
-
 
 module.exports = router;
