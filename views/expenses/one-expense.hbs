@@ -12,9 +12,9 @@
     {{/each}}
 <p>Trip: {{expense.trip.name}}</p>
 
-<a href="/private/trips/{{expense.trip._id}}/expenses/{{expense._id}}/edit"><button>Edit</button></a>
+<a href="/private/expenses/{{expense._id}}/edit"><button>Edit</button></a>
 
-<form action="/private/trips/{{expense.trip._id}}/expenses/{{expense._id}}/delete" method="POST">
+<form action="/private/expenses/{{expense._id}}/delete" method="POST">
     <button type="submit">Delete</button>
 </form>
     
