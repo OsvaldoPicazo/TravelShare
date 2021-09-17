@@ -1,4 +1,4 @@
-<h1>Edit Expense</h1>
+{{!-- <h1>Edit Expense</h1>
 
 <form action='/private/expenses/{{expense._id}}/edit' method='POST'>
 
@@ -11,7 +11,7 @@
     <option value="General">General</option>
     <option value="Accommodation">Accommodation</option>
     <option value="Transport">Transport</option>
-    <option value="Food & Drink">Food & Drink</option>
+    <option value="Food-Drink">Food-Drink</option>
   </select>
 
   <br>
@@ -30,4 +30,69 @@
   <br>
   <button type="submit">Save</button>
 
-</form>
+</form> --}}
+
+<div class="body-container">
+  <h1 id="all-trips-title">{{trip.name}}</h1>
+</div>
+
+<div class="floating-container">
+  <h2 class="floating-container-title">Edit Expense</h2>
+
+  <form class="floating-container-content" action="/private/expenses/{{expense._id}}/edit" method='POST'>
+
+    <div class="floating-container-content-data">
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for="category">Category:</label>
+          <select name="category" id="category" selected="{{expense.category}}">
+            <option value="General">General</option>
+            <option value="Accommodation">Accommodation</option>
+            <option value="Transport">Transport</option>
+            <option value="Food-Drink">Food-Drink</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <input type="text" name="description" id="description" value="{{expense.description}}" required>
+        </div>
+
+      </div>
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for='contributors'>Who is sharing?</label>
+          <select name='contributors' id="contributors" multiple>
+              <option disable selected value="" >Select friends</option>
+              {{#each expense.trip.participants}}
+                  <option value="{{this._id}}">{{this.username}}</option>
+              {{/each}}
+          </select>
+        </div>
+        
+        <div>
+          <label for="cost">Cost:</label>
+          <input type="text" name="cost" id="cost" value="{{expense.cost}}" required/>  
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="floating-container-button">
+      <button type="submit">Save</button>
+    </div>
+
+  </form>
+
+  <a class="floating-container-close" href="/private/expenses/{{expense._id}}"><img src="/images/close-25.png " alt="close" /></a>
+
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
+
+</div>

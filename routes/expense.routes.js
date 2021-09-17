@@ -38,7 +38,10 @@ router.route('/:id/edit')
 			}
 		})
 		.then(expense => {
-			res.render('expenses/edit-expense', {expense})
+			res.render('expenses/edit-expense', {
+				expense,
+				style: 'index.css'
+			})
 		})
 		.catch((error)=> {console.log(error)})
 	})
@@ -56,7 +59,7 @@ router.route('/:id/edit')
 			category,
 			cost,
 			contributors,
-			partialCost : cost / contributors.length
+			partialCost : Math.round((cost / contributors.length) * 100) / 100
 			})
 		.then(updatedExpense => {
             const tripId = updatedExpense.trip
@@ -72,7 +75,10 @@ router.route('/:id/add')
 		Trip.findById(tripId)
 		.populate("participants")
 		.then(trip => {
-			res.render('expenses/new-expense', {trip})
+			res.render('expenses/new-expense', {
+				trip,
+				style: 'index.css'
+			})
 		})
 		.catch((error)=> {console.log(error)})
 	})	
@@ -92,7 +98,7 @@ router.route('/:id/add')
 			user: req.session.currentUser._id,
 			trip: tripId,
 			contributors,
-			partialCost : cost / contributors.length
+			partialCost : Math.round((cost / contributors.length) * 100) / 100
 		})
 		.then(newExpense=> {
 			Trip.findByIdAndUpdate(tripId,
@@ -116,7 +122,10 @@ router.get('/:id', (req, res) => {
 	.populate("contributors")	
 	.populate("trip")
 	.then(expense => {
-		res.render('expenses/one-expense', {expense})
+		res.render('expenses/one-expense', {
+			expense,
+			style: 'index.css'
+		})
 	})
 	.catch((error) => {console.log(error)})
 })

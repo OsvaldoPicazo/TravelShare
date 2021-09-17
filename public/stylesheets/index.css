@@ -1,10 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+/* ------------------------------------------ */
+/*         Body configurations                */
+/* ------------------------------------------ */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+ font-family: Roboto;
+}
 
 #logout {
   display: none;
 }
 
+h1 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 112px;
+  color: black;
+  margin: 0;
+}
+
+h2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;  
+  margin: 0;
+}
+
+h3 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #282828;
+  margin: 0;
+}
+
+h4 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: black;  
+  margin: 0;
+}
+
+h5 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;  
+  color: black; 
+  margin: 0;
+}
+
+/* ------------------------------------------ */
+/*         Navbar                */
+/* ------------------------------------------ */
 
 #navbar-box {
   background-color: #434343;
@@ -86,6 +146,10 @@
   text-align: center;
   color: #282828;
   text-decoration: none;
+/* flex: none;
+order: 2;
+flex-grow: 0;
+margin: 32px 0px; */
 }
 
 #signup {
@@ -163,6 +227,7 @@
   color: #fafafa;
 }
 
+
 #getstartet-conteiner {
   display: flex;
   flex-direction: column;
@@ -199,4 +264,386 @@
   align-content: center;
   flex-wrap: nowrap;
 }
+
+/* ------------------------------------------ */
+/*         Content pages                      */
+/* ------------------------------------------ */
+ 
+.body-container {
+  width: 1204px;
+  height: 900px;
+  position: absolute;
+  left: 236px;
+  top: 0px;
+  /* background-color: rgb(116, 138, 235); */
+}
+
+/* ------------------------------------------ */
+/*         All trips page                     */
+/* ------------------------------------------ */
+  
+#all-trips-title {
+  background-image: url("/images/all-trips-1204x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#all-trips-container {
+  width: 1204px;
+  height: 640px;
+  display: flex;
+  flex-flow: column;
+}
+
+#all-trips-menu {
+  width: 960px;
+  height: 88px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#all-trips-content {
+  width: 960px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+}
+
+#all-trips-single {
+  margin: 50px 0 0 0;
+}
+
+.all-trips-single-line {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #F0F0F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.all-trips-single-line a {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;
+  margin: 0;
+}
+
+.all-trips-single-line div {
+  text-align: right;
+}
+
+/* ------------------------------------------ */
+/*         Floating container                 */
+/* ------------------------------------------ */
+
+.floating-container {
+  position: absolute;
+  width: 1008px;
+  height: 759px;
+  left: 334px;
+  top: 70px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+  filter: drop-shadow(0px 6px 16px rgba(0, 0, 0, 0.08));
+}
+
+.floating-container-title {
+  position: absolute;
+  left: 28.47%;
+  right: 30.95%;
+  top: 7.64%;
+  bottom: 87.09%;
+  
+  /* H2/medium */
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  /* identical to box height, or 133% */
+  
+  text-align: center;
+  
+  color: #000000;  
+}
+
+.floating-container-content{
+  position: absolute;
+  width: 1008px;
+  height: 569px;
+  left: 0px;
+  top: 190px; 
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
+.floating-container-content-data {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+.floating-container-content-column {
+  height: 250px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.floating-container-button button{
+  width: 212px;
+  height: 40px;
+  background: #85A5FF;
+  /* drop-shadow / button-primary */
+  
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;  
+
+  font-family: Roboto;
+  font-style: normal; 
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+}
+
+.floating-container-button{
+  display: flex;
+  justify-content: center;
+}
+
+.floating-container-content-column div {
+  display: flex;
+  flex-flow: column;
+}
+
+.floating-container-close{
+  position: absolute;
+  left: 94.05%;
+  right: 2.38%;
+  top: 3.69%;
+  bottom: 91.57%;
+}
+
+/* ------------------------------------------ */
+/*         One trip page                      */
+/* ------------------------------------------ */
+
+#one-trip-title {
+  background-image: url("/images/trip-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#one-trip-container {
+  width: 1204px;
+  height: 640px;
+  display: flex;
+  flex-flow: column;
+}
+
+#one-trip-menu {
+  width: 960px;
+  height: 88px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: right;
+}
+
+#one-trip-content {
+  width: 960px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+}
+
+#one-trip-single {
+  margin: 50px 0 0 0;
+}
+
+.one-trip-single-line {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #F0F0F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.one-trip-single-line a {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;
+  margin-left: 10px;
+  width: 500px;
+}
+
+#one-trip-single-line-description {
+  display: flex;
+}
+
+#one-trip-footer {
+  width: 960px;
+  text-align: right;
+  position: relative;
+  top: 100px;
+  left: 123px;
+}
+
+.body-container button {
+  width: 150px;
+  height: 40px;
+  background: white;
+  /* drop-shadow / button-primary */
+  
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;  
+
+  font-family: Roboto;
+  font-style: normal; 
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: black;
+}
+
+.body-container-button-edit {
+  position: absolute;
+  left: 350px;
+  top: 340px;
+}
+
+.body-container-button-delete {
+  position: absolute;
+  left: 650px;
+  top: 340px;
+}
+
+/* ------------------------------------------ */
+/*         One expense page                   */
+/* ------------------------------------------ */
+
+#one-expense-title {
+  background-image: url("/images/trip-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#one-expense-container {
+  width: 960px;
+  height: 590px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 170px;
+  left: 123px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+/* ------------------------------------------ */
+/*         Profile page                       */
+/* ------------------------------------------ */
+
+#profile-title {
+  background-image: url("/images/profile-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+
+
 

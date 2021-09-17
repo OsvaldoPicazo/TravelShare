@@ -1,13 +1,33 @@
-<h1>This is your private profile page, {{user.username}}</h1>
+<div class="body-container">
 
-<br /><br />
+    <h1 id="profile-title">Profile</h1>
 
-<div>
-<a href="/auth/logout">Logout</a>
+    <div id="one-expense-container">
+
+        <div>
+            <h4>User Name: </h4>
+            <h5>{{user.username}}</h5>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div>
+            <h4>Email:</h4>
+            <h5>{{user.email}}</h5>
+            <br>
+            <br>
+            <h4>Password: </h4>
+            <h5>********</h5>
+        </div>
+
+    </div>
+
+        {{!-- <a href="/private/expenses/{{expense._id}}/edit" class="body-container-button-edit"><button>Edit</button></a>
+
+        <form action="/private/expenses/{{expense._id}}/delete" method="POST">
+            <button type="submit" class="body-container-button-delete">Delete</button>
+        </form> --}}
+
 </div>
 
-<br /><br />
-
-<div>
-<a href="/private/trips/add">Add a new Trip</a>
-</div>

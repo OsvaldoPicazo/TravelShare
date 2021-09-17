@@ -50,7 +50,11 @@ router.route('/:id/edit')
 		.then(trip => {
 			User.find()
 			.then(allUsers => {
-				res.render('trips/edit-trip', {trip, allUsers})
+				res.render('trips/edit-trip', 
+				{trip, 
+				allUsers,
+				style: 'index.css'
+				})
 			})
 			.catch((error)=> {console.log(error)})
 		})
@@ -90,7 +94,10 @@ router.route('/add')
 	.get((req, res) => {
 		User.find()
 		.then(allUsers => {
-          res.render('trips/new-trip', {allUsers})
+          res.render('trips/new-trip', {
+			  allUsers,
+			  style: 'index.css'
+			})
         })
 		.catch((error)=> {console.log(error)})
 	})
@@ -172,8 +179,12 @@ router.get('/:id', (req, res) => {
                     amount: utils.tripPersonalBalance(trip, participant._id)
                 })
             }
-            console.log("balancessssssssssssss: ", balances)
-            res.render("trips/one-trip", {trip, balances})
+            //console.log("balancessssssssssssss: ", balances)
+            res.render("trips/one-trip", {
+				trip, 
+				balances,
+				style: 'index.css'
+			})
         })
 		.catch((error)=> {console.log(error)})
 	})
@@ -186,8 +197,22 @@ router.get('/', (req, res) => {
 	
 	Trip.find({ participants: userId })
 		.populate('participants')
+		.populate("expenses")
+		.populate({
+			path: "expenses",
+			populate: {
+				path: 'user trip'
+			}
+		})
 		.then((trips) => {
-			res.render('trips/all-trips', { trips, style: 'trips.css' });
+
+			//calculate overall Expenses
+			let overallExpense = 0;
+			for(const eachTrip of trips) {
+				overallExpense += eachTrip.totalExpenses;
+			}
+			overallExpense = Math.round(overallExpense * 100) / 100
+			res.render('trips/all-trips', { trips, overallExpense, style: 'index.css' });
 		})
 		.catch((error) => {
 			console.log(error);

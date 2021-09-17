@@ -1,22 +1,50 @@
-<h1>List of all trips</h1>
+<div class="body-container">
+    
+    <h1 id="all-trips-title">Trips</h1>
 
-{{#each trips}}
+    <div id="all-trips-container">
 
-<div class="trips-card">
+        <div id="all-trips-menu">
 
-<h2>Name: {{name}}</h2>
+            <a href="/private/trips/add"><img src="/images/plus52-5.png " alt="New Trip" /></a>
+            <div>
+                <h4>Overall Sum</h4>
+                <h4>€ {{overallExpense}}</h4>
+            </div>
 
-<p>Description: {{description}}</p>
+        </div>
 
-<img class="trip-img" src="{{imageUrl}}" alt="{{name}}" />
+        <div id="all-trips-content">
 
-<h4>Participants: </h4>
-    {{#each participants}}
-        {{username}}
-    {{/each}}
-<br>
-<br>
-<a href="/private/trips/{{_id}}">Trip details</a>
+            {{#each trips}}
+
+            <div id="all-trips-single">
+                <div class="all-trips-single-line">
+                    <a href="/private/trips/{{_id}}">{{name}}</a>
+                    <div>
+                        {{#each participants}}
+                            <span>{{username}}</span> 
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="all-trips-single-line">
+                    <h5>{{description}}</h5>
+                    <div>
+                        <h4>Sum</h4>
+                        <h4>€ {{totalExpenses}}</h4>
+                    </div>
+                </div>
+
+            </div>
+
+            {{!-- <img class="trip-img" src="{{imageUrl}}" alt="{{name}}" /> --}}
+            {{!-- <a href="/private/trips/{{_id}}">Trip details</a> --}}
+            {{/each}}
+
+        </div>
+
+    </div>
+    
 </div>
 
-{{/each}}
