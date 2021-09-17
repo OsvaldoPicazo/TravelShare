@@ -573,6 +573,30 @@ height: 900;
   justify-content: space-evenly;
 }
 
+/* ------------------------------------------ */
+/*         Profile page                       */
+/* ------------------------------------------ */
+
+#profile-title {
+  background-image: url("/images/profile-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
 
 
 
