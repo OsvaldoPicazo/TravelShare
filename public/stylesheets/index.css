@@ -1,3 +1,7 @@
+/* ------------------------------------------ */
+/*         Body configurations                */
+/* ------------------------------------------ */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body {
@@ -24,6 +28,16 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #282828;
+  margin: 0;
+}
+
 h4 {
   font-family: Roboto;
   font-style: normal;
@@ -44,7 +58,9 @@ h5 {
   margin: 0;
 }
 
-
+/* ------------------------------------------ */
+/*         Navbar                */
+/* ------------------------------------------ */
 
 #navbar-box {
   background-color: #434343;
@@ -57,8 +73,6 @@ h5 {
   bottom: 0%;
 }
 
-
-
 #sideNav {
   position: absolute;
   left: 30.08%;
@@ -68,8 +82,6 @@ h5 {
   background-color: #434343;
 
 }
-
-
 
 #frame a {
 display: flex;
@@ -90,39 +102,36 @@ flex: none;
 order: 2;
 flex-grow: 0;
 margin: 32px 0px;
-
 }
 
- a{
-  position: static;
-  width: 65px;
-  height: 28px;
-  left: 8px;
-  top: 8px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  text-decoration: none;
-  /* Primary / White */
-  color: #FFFFFF;
-  /* Inside Auto Layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 10px;
- }
+a{
+position: static;
+width: 65px;
+height: 28px;
+left: 8px;
+top: 8px;
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 28px;
+text-decoration: none;
+/* Primary / White */
+color: #FFFFFF;
+/* Inside Auto Layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px 10px;
+}
 
 #sideLogo{
-  position: absolute;
-  left: 25%;
-  right: 29.66%;
-  top: 3%;
-  bottom: 80.89%;
-}
- 
-
+position: absolute;
+left: 25%;
+right: 29.66%;
+top: 3%;
+bottom: 80.89%;
+} 
 
 #login{
   
@@ -179,36 +188,37 @@ color: #282828;
   color: #282828;
 }
   
-
 #logout {
   display: none;
  } 
 
- #loginForm{
-  display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-end;
-	align-content: flex-end;
- }
+#loginForm{
+display: flex;
+flex-direction: column;
+flex-wrap: nowrap;
+justify-content: flex-start;
+align-items: flex-end;
+align-content: flex-end;
+}
 
- 
- #logout {
-  display: none;
- } 
+#logout {
+display: none;
+} 
 
- #mainpage{
-  display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: space-between;
-  width: 1440;
-  height: 900;
- }
+#mainpage{
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: center;
+align-items: center;
+align-content: space-between;
+width: 1440;
+height: 900;
+}
 
+/* ------------------------------------------ */
+/*         Content pages                      */
+/* ------------------------------------------ */
  
 .body-container {
   width: 1204px;
@@ -221,6 +231,10 @@ color: #282828;
   flex-flow: column;
 }
 
+/* ------------------------------------------ */
+/*         All trips page                     */
+/* ------------------------------------------ */
+  
 #all-trips-title {
   background-image: url("/images/all-trips-1204x260.png");
   background-repeat: no-repeat;
@@ -306,7 +320,6 @@ color: #282828;
 /*         Floating container                 */
 /* ------------------------------------------ */
 
-
 .floating-container {
   position: absolute;
   width: 1008px;
@@ -390,4 +403,176 @@ color: #282828;
   display: flex;
   flex-flow: column;
 }
+
+.floating-container-close{
+  position: absolute;
+  left: 94.05%;
+  right: 2.38%;
+  top: 3.69%;
+  bottom: 91.57%;
+}
+
+/* ------------------------------------------ */
+/*         One trip page                      */
+/* ------------------------------------------ */
+
+#one-trip-title {
+  background-image: url("/images/trip-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#one-trip-container {
+  width: 1204px;
+  height: 640px;
+  display: flex;
+  flex-flow: column;
+}
+
+#one-trip-menu {
+  width: 960px;
+  height: 88px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: right;
+}
+
+#one-trip-content {
+  width: 960px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 50px;
+  left: 123px;
+}
+
+#one-trip-single {
+  margin: 50px 0 0 0;
+}
+
+.one-trip-single-line {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #F0F0F0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.one-trip-single-line a {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 46px;
+  color: black;
+  margin-left: 10px;
+  width: 500px;
+}
+
+#one-trip-single-line-description {
+  display: flex;
+}
+
+#one-trip-footer {
+  width: 960px;
+  text-align: right;
+  position: relative;
+  top: 100px;
+  left: 123px;
+}
+
+.body-container button {
+  width: 150px;
+  height: 40px;
+  background: white;
+  /* drop-shadow / button-primary */
+  
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.043);
+  border-radius: 4px;  
+
+  font-family: Roboto;
+  font-style: normal; 
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: black;
+}
+
+.body-container-button-edit {
+  position: absolute;
+  left: 350px;
+  top: 340px;
+}
+
+.body-container-button-delete {
+  position: absolute;
+  left: 650px;
+  top: 340px;
+}
+
+/* ------------------------------------------ */
+/*         One expense page                   */
+/* ------------------------------------------ */
+
+#one-expense-title {
+  background-image: url("/images/trip-1024x260.png");
+  background-repeat: no-repeat;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-size: cover;
+  
+  width: 1204px;
+  height: 260px;
+
+  line-height: 180px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Neutral / 1 */
+
+  color: #FFFFFF;
+}
+
+#one-expense-container {
+  width: 960px;
+  height: 590px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 170px;
+  left: 123px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+}
+
+
+
 

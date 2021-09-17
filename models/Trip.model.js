@@ -11,7 +11,7 @@ const tripSchema = new Schema({
 	// option to add an image to the trip
 	imageUrl: {
 		type: String,
-		default: "https://previews.123rf.com/images/lenm/lenm1107/lenm110700274/9991430-illustration-of-friends-taking-a-summer-trip.jpg"
+		default: "/images/trip-1024x260.png"
 	},
 	// list of participants (users). Right now only the user participates in the trip. later it should be an array to have several participants
 	participants: [{ 

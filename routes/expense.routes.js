@@ -56,7 +56,7 @@ router.route('/:id/edit')
 			category,
 			cost,
 			contributors,
-			partialCost : cost / contributors.length
+			partialCost : Math.round((cost / contributors.length) * 100) / 100
 			})
 		.then(updatedExpense => {
             const tripId = updatedExpense.trip
@@ -92,7 +92,7 @@ router.route('/:id/add')
 			user: req.session.currentUser._id,
 			trip: tripId,
 			contributors,
-			partialCost : cost / contributors.length
+			partialCost : Math.round((cost / contributors.length) * 100) / 100
 		})
 		.then(newExpense=> {
 			Trip.findByIdAndUpdate(tripId,

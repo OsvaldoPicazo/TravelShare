@@ -1,70 +1,58 @@
-<h1>Trip Details</h1>
-
-<div class="trip-card">
-</div>
-
-<h2>Name: {{trip.name}}</h2>
-<p>Description: {{trip.description}}</p>
-<img class="trip-img" src="{{trip.imageUrl}}" alt="{{trip.name}}" />
-
-<h4>Participants: </h4>
-{{#each trip.participants}}
-  <p>{{username}}</p>
-{{/each}}
-<br>
-
-<a href="/private/trips/{{trip._id}}/edit"><button>Edit</button></a>
-
-<form action="/private/trips/{{trip._id}}/delete" method="POST">
-    <button type="submit">Delete</button>
-</form>
-
-<div>
-    <form action="/private/trips/country" method="POST">
-        <label for="country"></label>
-        <input type="text" name="country" id="country" placeholder="Country" >
-
-        <button type="submit">Search for an Country</button>        
-    </form>
-</div>
-
-<br>
-<p>Total Expenses: {{trip.totalExpenses}}</p>
-
-
-<a href="/private/expenses/{{trip._id}}/add"><button>New Expense</button></a>
-
-
-{{#if trip.expenses}}
-
-<br>
-<p>Balances:</p>
-<br>
-
-{{#each balances}}
-  <br>
-  <p>{{this.user}}: {{this.amount}}</p>
-{{/each}}
-
-
-<h3>List of expenses:</h3>
-  
-  {{#each trip.expenses}}
-
-    <br>
-    <h4>Description: {{this.description}}</h4>
+<div class="body-container">
     
-    <p>Cost: {{this.cost}}</p>
-  
-    {{!-- <p>Category: {{this.category}}</p> --}}
-    {{!-- <p>Paid by: {{this.user.username}}</p> --}}
-    {{!-- <p>Contributors: </p>
-      {{#each this.contributors}}
-        <p>{{this.username}}</p>
-      {{/each}} --}}
-    
-    <a href="/private/expenses/{{this._id}}"><button>Details</button></a>
-  
-  {{/each}}
+  <h1 id="one-trip-title">{{trip.name}}</h1>
 
-{{/if}}
+    <div id="one-trip-container">
+
+
+        <div id="one-trip-menu">
+
+            <a href="/private/expenses/{{trip._id}}/add"><img src="/images/plus52-5.png " alt="New Expense" /></a>
+
+        {{#if trip.expenses}}
+            <div id="one-trip-menu-balances">
+                {{#each balances}}
+                  <h4>{{this.user}}: € {{this.amount}}</h4>
+                {{/each}}
+            </div>
+
+        </div>
+
+        <div id="one-trip-content">
+
+        {{#each trip.expenses}}
+            <div id="one-trip-single">
+    
+                <div class="one-trip-single-line">
+                    <div id="one-trip-single-line-description">
+                      <img src="/images/{{this.category}}.png" alt="{{this.category}}">
+                      <a href="/private/expenses/{{this._id}}">{{this.description}}</a>
+                    </div>
+                    <div>
+                      <h3>{{this.user.username}}</h3>
+                    </div>
+                    <div>
+                      <h3>€ {{this.cost}}</h3>
+                    </div>
+                </div>
+
+            </div>
+          {{/each}}
+
+        </div>
+
+        <div id="one-trip-footer">
+          <h3>Sum: € {{trip.totalExpenses}}</h3>
+        </div>
+
+      {{/if}}
+
+    </div>
+
+      <a href="/private/trips/{{trip._id}}/edit"><button class="body-container-button-edit">Edit Trip</button></a>
+
+  <form action="/private/trips/{{trip._id}}/delete" method="POST">
+    <button class="body-container-button-delete" type="submit">Delete Trip</button>
+  </form>
+    
+</div>

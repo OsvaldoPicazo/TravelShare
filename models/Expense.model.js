@@ -12,7 +12,7 @@ const expenseSchema = new Schema({
 		enum: [
 			'Accommodation',
 			'Transport',
-			'Food & Drink',
+			'Food-Drink',
 			'General'
 		],
 		default: 'General'

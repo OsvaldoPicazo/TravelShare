@@ -172,7 +172,7 @@ router.get('/:id', (req, res) => {
                     amount: utils.tripPersonalBalance(trip, participant._id)
                 })
             }
-            console.log("balancessssssssssssss: ", balances)
+            //console.log("balancessssssssssssss: ", balances)
             res.render("trips/one-trip", {trip, balances})
         })
 		.catch((error)=> {console.log(error)})
@@ -200,6 +200,7 @@ router.get('/', (req, res) => {
 			for(const eachTrip of trips) {
 				overallExpense += eachTrip.totalExpenses;
 			}
+			overallExpense = Math.round(overallExpense * 100) / 100
 			res.render('trips/all-trips', { trips, overallExpense, style: 'trips.css' });
 		})
 		.catch((error) => {

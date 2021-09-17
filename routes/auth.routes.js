@@ -96,7 +96,7 @@ router.post('/login', isNotLoggedIn, (req, res) => {
 
 				if (passwordCorrect) {
 					req.session.currentUser = user;
-					res.redirect('/private/profile');
+					res.redirect('/private/trips');
 				} else {
 					res.render('auth/login', { errorMessage: 'Input invalid' });
 				}
