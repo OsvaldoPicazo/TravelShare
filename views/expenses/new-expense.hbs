@@ -1,32 +1,64 @@
-<h2>Add an expense:</h2>
+<div class="body-container">
+  <h1 id="all-trips-title">{{trip.name}}</h1>
+</div>
 
-<form action='/private/expenses/{{trip._id}}/add' method='POST'>
+<div class="floating-container">
+  <h2 class="floating-container-title">New Expense</h2>
 
-  <label for="description">Description: </label>
-  <input type="text" name="description" id="description" required>
+  <form class="floating-container-content" action="/private/expenses/{{trip._id}}/add" method='POST'>
 
-  <br>
-  <label for="category">Category:</label>
-  <select name="category" id="category">
-    <option value="General" selected>General</option>
-    <option value="Accommodation">Accommodation</option>
-    <option value="Transport">Transport</option>
-    <option value="Food & Drink">Food & Drink</option>
-  </select>
+    <div class="floating-container-content-data">
 
-  <br>
-  <label for="cost">Cost:</label>
-  <input type="text" name="cost" id="cost" required/>  
+      <div class="floating-container-content-column">
 
-  <label for='contributors'>Contributors</label>
-  <select name='contributors' id="contributors" multiple>
-      <option disable selected value="" >Select contributors</option>
-      {{#each trip.participants}}
-          <option value="{{this._id}}">{{this.username}}</option>
-      {{/each}}
-  </select>
+        <div>
+          <label for="category">Category:</label>
+          <select name="category" id="category">
+            <option value="General" selected>General</option>
+            <option value="Accommodation">Accommodation</option>
+            <option value="Transport">Transport</option>
+            <option value="Food-Drink">Food-Drink</option>
+          </select>
+        </div>
 
-  <br>
-  <button type="submit">Add expense</button>
+        <div>
+          <label for="description">Description: </label>
+          <input type="text" name="description" id="description" required>
+        </div>
 
-</form>
+      </div>
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for='contributors'>Who is sharing?</label>
+          <select name='contributors' id="contributors" multiple>
+              <option disable selected value="" >Select friends</option>
+              {{#each trip.participants}}
+                  <option value="{{this._id}}">{{this.username}}</option>
+              {{/each}}
+          </select>
+        </div>
+        
+        <div>
+          <label for="cost">Cost:</label>
+          <input type="text" name="cost" id="cost" required/> 
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="floating-container-button">
+      <button type="submit">Add Expense</button>
+    </div>
+
+  </form>
+
+  <a class="floating-container-close" href="/private/trips/{{trip._id}}"><img src="/images/close-25.png " alt="close" /></a>
+
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
+
+</div>

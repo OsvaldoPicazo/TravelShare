@@ -1,20 +1,47 @@
-<h1>Expense Details</h1>
-  
+<div class="body-container">
 
-<h2>Description: {{expense.description}}</h2>
+    <h1 id="one-expense-title">{{expense.trip.name}}</h1>
 
-<p>Cost: {{expense.cost}}</p>
-<p>Category: {{expense.category}}</p>
-<p>Paid by: {{expense.user.username}}</p>
-<p>Contributors: </p>
-    {{#each expense.contributors}}
-    <p>{{this.username}}</p>
-    {{/each}}
-<p>Trip: {{expense.trip.name}}</p>
+    <div id="one-expense-container">
 
-<a href="/private/expenses/{{expense._id}}/edit"><button>Edit</button></a>
+        <div>
+            <h4>Description: </h4>
+            <h5>{{expense.description}}</h5>
+            <br>
+            <br>
+            <br>
+            <h4>Category: </h4>
+            <h5>{{expense.category}}</h5>
+            <br>
+            <br>
+            <br>
+            <h4>Cost: </h4>
+            <h5>€ {{expense.cost}}</h5>
+        </div>
 
-<form action="/private/expenses/{{expense._id}}/delete" method="POST">
-    <button type="submit">Delete</button>
-</form>
-    
+        <div>
+            <h4>Paid by:</h4>
+            <h5>{{expense.user.username}}</h5>
+            <br>
+            <br>
+            <h4>Split equally between: </h4>
+                {{#each expense.contributors}}
+                <h5>{{this.username}}</h5>
+                {{/each}}
+            <br>
+            <br>
+            <h4>Each one pays: </h4>
+            <h5>€ {{expense.partialCost}}</h5>
+
+        </div>
+
+    </div>
+
+        <a href="/private/expenses/{{expense._id}}/edit" class="body-container-button-edit"><button>Edit</button></a>
+
+        <form action="/private/expenses/{{expense._id}}/delete" method="POST">
+            <button type="submit" class="body-container-button-delete">Delete</button>
+        </form>
+
+</div>
+

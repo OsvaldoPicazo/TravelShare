@@ -2,8 +2,10 @@ class Utils {
 
     // return the sum of all expenses for a given trip
     tripTotalExpenses(trip) {
-        return trip.expenses.reduce((sum, el) => sum + el.cost,
+        let totalExpenses = trip.expenses.reduce((sum, el) => sum + el.cost,
 		0)
+        totalExpenses = Math.round(totalExpenses * 100) / 100
+        return totalExpenses
     }
 
     // return a trip balance for a given participant
@@ -19,6 +21,7 @@ class Utils {
                 balance -= expense.partialCost
             }
         }
+        balance = Math.round(balance * 100) / 100
         return balance
     }
 }

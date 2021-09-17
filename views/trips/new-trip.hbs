@@ -1,31 +1,60 @@
-<h1>Create a Trip</h1>
+<div class="body-container">
+  <h1 id="all-trips-title">Trips</h1>
+</div>
 
+<div class="floating-container">
+  <h2 class="floating-container-title">New Trip</h2>
 
-<form action="/private/trips/add" method='POST' enctype="multipart/form-data">
+  <form class="floating-container-content" action="/private/trips/add" method='POST' enctype="multipart/form-data">
 
-  <label for="name">Name:</label>
-  <input type="text" name="name" id="name" required />
+    <div class="floating-container-content-data">
 
-  <label for="description">Description: </label>
-  <textarea type="text" name="description" id="description" required></textarea>
+      <div class="floating-container-content-column">
 
-  <br>
-  <label for='participants'>Participants</label>
-  <select name='participants' id="participants" multiple>
-      <option disable selected value="" >Select participants</option>
-      {{#each allUsers}}
-          <option value="{{this._id}}">{{this.username}}</option>
-      {{/each}}
-  </select>
+        <div>
+          <label for="name">Location:</label>
+          <input type="text" name="name" id="name" required />  
+        </div>
 
-  <label for="imageUrl">Image:</label>
-  <input type="file" name="imageUrl" id="imageUrl">  
+        <div>
+          <label for="description">Description: </label>
+          <textarea type="text" name="description" id="description" required></textarea>
+        </div>
 
-  <button type="submit">Create Trip</button>
+      </div>
 
-</form>
+      <div class="floating-container-content-column">
 
+        <div>
+          <label for='participants'>Friends:</label>
+          <select name='participants' id="participants" multiple>
+              <option disable selected value="" >Select friends</option>
+              {{#each allUsers}}
+                  <option value="{{this._id}}">{{this.username}}</option>
+              {{/each}}
+          </select>
+        </div>
+        
+        <div>
+          <label for="imageUrl">Cover Photo:</label>
+          <input type="file" name="imageUrl" id="imageUrl">  
+        </div>
 
-{{#if errorMessage}}
-  <p>{{errorMessage}}</p>
-{{/if}}
+      </div>
+
+    </div>
+
+    <div class="floating-container-button">
+      <button type="submit">Add Trip</button>
+    </div>
+
+  </form>
+
+  <a class="floating-container-close" href="/private/trips"><img src="/images/close-25.png " alt="close" /></a>
+
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
+
+</div>
+

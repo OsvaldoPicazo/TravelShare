@@ -13,7 +13,6 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 
 const indexRouter = require('./routes/index');
 const authRouter = require("./routes/auth.routes");
-const privateRouter = require('./routes/private.routes');
 const tripRouter = require('./routes/trip.routes');
 const expenseRouter = require('./routes/expense.routes');
 const profileRouter = require('./routes/profile.routes');
