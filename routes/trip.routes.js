@@ -50,7 +50,11 @@ router.route('/:id/edit')
 		.then(trip => {
 			User.find()
 			.then(allUsers => {
-				res.render('trips/edit-trip', {trip, allUsers})
+				res.render('trips/edit-trip', 
+				{trip, 
+				allUsers,
+				style: 'index.css'
+				})
 			})
 			.catch((error)=> {console.log(error)})
 		})
@@ -90,7 +94,10 @@ router.route('/add')
 	.get((req, res) => {
 		User.find()
 		.then(allUsers => {
-          res.render('trips/new-trip', {allUsers})
+          res.render('trips/new-trip', {
+			  allUsers,
+			  style: 'index.css'
+			})
         })
 		.catch((error)=> {console.log(error)})
 	})
@@ -173,7 +180,11 @@ router.get('/:id', (req, res) => {
                 })
             }
             //console.log("balancessssssssssssss: ", balances)
-            res.render("trips/one-trip", {trip, balances})
+            res.render("trips/one-trip", {
+				trip, 
+				balances,
+				style: 'index.css'
+			})
         })
 		.catch((error)=> {console.log(error)})
 	})
@@ -201,7 +212,7 @@ router.get('/', (req, res) => {
 				overallExpense += eachTrip.totalExpenses;
 			}
 			overallExpense = Math.round(overallExpense * 100) / 100
-			res.render('trips/all-trips', { trips, overallExpense, style: 'trips.css' });
+			res.render('trips/all-trips', { trips, overallExpense, style: 'index.css' });
 		})
 		.catch((error) => {
 			console.log(error);

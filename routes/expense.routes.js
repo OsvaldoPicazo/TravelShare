@@ -38,7 +38,10 @@ router.route('/:id/edit')
 			}
 		})
 		.then(expense => {
-			res.render('expenses/edit-expense', {expense})
+			res.render('expenses/edit-expense', {
+				expense,
+				style: 'index.css'
+			})
 		})
 		.catch((error)=> {console.log(error)})
 	})
@@ -72,7 +75,10 @@ router.route('/:id/add')
 		Trip.findById(tripId)
 		.populate("participants")
 		.then(trip => {
-			res.render('expenses/new-expense', {trip})
+			res.render('expenses/new-expense', {
+				trip,
+				style: 'index.css'
+			})
 		})
 		.catch((error)=> {console.log(error)})
 	})	
@@ -116,7 +122,10 @@ router.get('/:id', (req, res) => {
 	.populate("contributors")	
 	.populate("trip")
 	.then(expense => {
-		res.render('expenses/one-expense', {expense})
+		res.render('expenses/one-expense', {
+			expense,
+			style: 'index.css'
+		})
 	})
 	.catch((error) => {console.log(error)})
 })
