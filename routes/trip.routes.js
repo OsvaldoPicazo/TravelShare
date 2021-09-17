@@ -129,17 +129,24 @@ router.route('/add')
 });
 
 // search for a country
-router.post('/country',(req, res)=>{
-	const countryName = req.body.country
-	axios
-	.get(`https://restcountries.eu/rest/v2/name/${countryName}`)
-	.then(response => {
-	   const data = response.data[0];
-	   res.render('countries/country-details', {
-	   style: 'country-details.css', data 
+router.route('/country')
+	.get((req, res) => {
+		res.render('countries/new-country', {
+			style: 'index.css'
+		})
 	})
-  })
-  .catch(err => console.log(err));
+	.post((req, res)=>{
+		const countryName = req.body.country
+		axios
+		.get(`https://restcountries.eu/rest/v2/name/${countryName}`)
+		.then(response => {
+			const data = response.data[0];
+			res.render('countries/country-details', {
+			style: 'index.css', data 
+			})
+		.catch(err => console.log(err));
+	})
+	.catch(err => console.log(err));
 })
 
 // display a specific trip

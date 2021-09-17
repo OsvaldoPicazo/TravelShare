@@ -1,15 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
-}
 .error {
   background: #f02b63;
   box-sizing: border-box;
@@ -24,19 +16,23 @@ h1 {
   margin: 5px;
   font-family: "Open Sans", sans-serif;
 }
+
 #navtext {
   color: #fbfcf8;
   font-size: 20px;
 }
+
 .navbarcolor {
   background-color: #91d7a4;
   border-color: #91d7a4;
 }
+
 .button-travel {
   background-color: #91d7a4;
   border-color: #91d7a4;
   text-align: center;
 }
+
 #myInput {
   background-image: url("/css/searchicon.png"); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
@@ -47,12 +43,14 @@ h1 {
   border: 1px solid #ddd; /* Add a grey border */
   margin-bottom: 12px; /* Add some space below the input */
 }
+
 #myUL {
   /* Remove default list styling */
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 #myUL li a {
   border: 1px solid #ddd; /* Add a border to all links */
   margin-top: -1px; /* Prevent double borders */
@@ -67,6 +65,7 @@ h1 {
 #myUL li a:hover:not(.header) {
   background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
+
 .tabs {
   display: block;
   display: -webkit-flex;
@@ -79,6 +78,7 @@ h1 {
   margin-bottom: 40px;
   overflow: hidden;
 }
+
 .tabs [class^="tab"] label,
 .tabs [class*=" tab"] label {
   cursor: pointer;
@@ -89,6 +89,7 @@ h1 {
   padding: 2rem 0;
   text-align: center;
 }
+
 .tabs [class^="tab"] [type="radio"],
 .tabs [class*=" tab"] [type="radio"] {
   border-bottom: 1px solid rgba(239, 237, 239, 0.5);

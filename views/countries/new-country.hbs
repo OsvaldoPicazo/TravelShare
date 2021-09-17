@@ -1,0 +1,36 @@
+<div class="body-container">
+  <h1 id="all-trips-title">Explore</h1>
+</div>
+
+<div class="floating-container">
+  <h2 class="floating-container-title">Explore your next destination!</h2>
+
+  <form class="floating-container-content" action="/private/trips/country" method='POST'>
+
+    <div class="floating-container-content-data">
+
+      <div class="floating-container-content-column">
+
+        <div>
+          <label for="country">Search for a country:</label>
+          <input type="text" name="country" id="country" required />  
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="floating-container-button">
+      <button type="submit">Search</button>
+    </div>
+
+  </form>
+
+  <a class="floating-container-close" href="/private/trips"><img src="/images/close-25.png " alt="close" /></a>
+
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
+
+</div>
+

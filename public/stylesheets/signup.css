@@ -1,15 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
-body {
-  font-family: Roboto;
-}
-
-#signup {
-  display: none;
-}
-#logout {
-  display: none;
-}
 
 
 
@@ -238,4 +227,8 @@ button {
   /* Character / Primary(inverse) */
 
   color: #ffffff;
+}
+
+#logout {
+  display: none;
 }

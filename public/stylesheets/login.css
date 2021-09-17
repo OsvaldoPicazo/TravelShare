@@ -1,14 +1,10 @@
 
-  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
-
 #login {
   display: none;
 }
 #logout {
  display: none;
 }
-
-
 
 #navbar-box {
   background-color: #434343;
